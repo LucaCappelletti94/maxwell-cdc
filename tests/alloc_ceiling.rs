@@ -14,9 +14,13 @@ use std::alloc::System;
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
 /// Parsing `row-insert` must stay within a small, fixed number of allocations.
+///
+/// The observed count is 20. The ceiling sits just above it rather than at a round number,
+/// because `RowChange` has 15 named fields and a bug allocating once per field would land
+/// near 35, which a looser bound would wave through.
 #[test]
 fn row_insert_parsing_stays_within_its_allocation_ceiling() {
-    const CEILING: usize = 40;
+    const CEILING: usize = 24;
 
     let fixture = support::get("row-insert");
 

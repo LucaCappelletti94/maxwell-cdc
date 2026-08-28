@@ -2,7 +2,7 @@
 
 mod support;
 
-use maxwell_cdc::{Message, OpType, parse};
+use maxwell_cdc::{Message, OpType, ParseError, parse};
 use serde_json::{Value, json};
 
 /// The operation type a message with this `type` tag must report.
@@ -36,8 +36,12 @@ fn messages_deduplicate_through_a_hash_set() {
 
 /// The catch-all must stay empty for messages this crate fully models.
 ///
-/// If it ever fills up for a fixture, either Maxwell added a field worth modelling or the
-/// catch-all is swallowing one this crate already has, including the `type` tag itself.
+/// This is the real guard against a field being dropped from a struct: the reserialization
+/// test cannot see that, because the catch-all puts the field back. If this fills up, either
+/// Maxwell added a field worth modelling or the catch-all is swallowing one the crate
+/// already has, including the `type` tag itself.
+///
+/// Its blind spot is a variant with no fixture, which it never reaches.
 #[test]
 fn nothing_in_the_corpus_lands_in_the_catch_all() {
     for (name, raw) in support::all() {
@@ -63,6 +67,30 @@ fn nothing_in_the_corpus_lands_in_the_catch_all() {
             extra.is_empty(),
             "{name}: unmodelled fields landed in the catch-all: {extra:?}"
         );
+    }
+}
+
+/// Every tag in the corpus must be recognised by the error classifier.
+///
+/// A tag the library models but forgot to list internally still parses when the payload is
+/// valid, so nothing else notices. It only shows up on a broken payload of that type, which
+/// gets blamed on an unrecognised message type instead of on the payload. Stripping each
+/// fixture down to its tag is the cheapest way to reach that path.
+#[test]
+fn a_broken_payload_is_never_blamed_on_its_message_type() {
+    for (name, raw) in support::all() {
+        let original: Value = serde_json::from_str(&raw).expect("parse fixture");
+        let tag = original["type"].as_str().expect("type tag");
+
+        let tag_only = json!({ "type": tag }).to_string();
+
+        match parse(&tag_only) {
+            Err(ParseError::Json(_)) => {}
+            Err(ParseError::UnknownMessageType(reported)) => panic!(
+                "{name}: `{reported}` is a modelled type but the classifier does not know it"
+            ),
+            Ok(message) => panic!("{name}: parsed with no fields at all: {message:?}"),
+        }
     }
 }
 
@@ -97,8 +125,14 @@ fn unmodelled_fields_survive_a_roundtrip() {
 
 /// Reserializing a parsed message must reproduce every field Maxwell emitted.
 ///
-/// The fixtures are the raw lines Maxwell wrote, so a field this crate does not model shows
-/// up here as a missing key, and a field this crate invents shows up as an extra key.
+/// What this proves on its own is narrow. The `extra` catch-all absorbs any field the crate
+/// does not model and flattens it back out, so a field dropped from a struct still passes
+/// here. It catches a field this crate invents, a value it mangles, and a field it fails to
+/// re-emit at all.
+///
+/// Dropped fields are caught by `nothing_in_the_corpus_lands_in_the_catch_all` instead. The
+/// two together are what prove every field Maxwell emits is modelled, so deleting either
+/// one guts the guarantee.
 #[test]
 fn every_fixture_reserializes_to_the_bytes_maxwell_emitted() {
     for (name, raw) in support::all() {

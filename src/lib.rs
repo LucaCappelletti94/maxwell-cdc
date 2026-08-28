@@ -12,7 +12,8 @@ use thiserror::Error;
 /// Every `type` tag Maxwell emits, in [`Message`] variant order.
 ///
 /// Used only to tell an unrecognised message type apart from malformed input, which
-/// `serde_json` reports as the same error category.
+/// `serde_json` reports as the same error category. Kept in step with the enum by
+/// [`Message::tag`] and the `message_tags_match_the_variants` test below.
 const MESSAGE_TAGS: [&str; 12] = [
     "insert",
     "update",
@@ -102,9 +103,9 @@ pub fn parse_slice(json: &[u8]) -> Result<Message, ParseError> {
 
 /// Parse a JSON Lines stream, the shape Maxwell's file and stdout producers write.
 ///
-/// Yields one result per non-blank line, so a single bad line does not end the stream and
-/// the caller decides whether to skip it. Blank lines are ignored, and line numbers count
-/// every line including those.
+/// Yields one result per line that carries content, so a single bad line does not end the
+/// stream and the caller decides whether to skip it. Empty and whitespace-only lines are
+/// ignored, and line numbers count every line including those.
 ///
 /// ```
 /// let stream = concat!(
@@ -202,6 +203,28 @@ impl Message {
             | Message::DatabaseDrop(_) => None,
         }
     }
+
+    /// The `type` tag Maxwell writes for this variant.
+    ///
+    /// Matched exhaustively so a new variant cannot be added without deciding its tag, which
+    /// is what keeps the crate's internal tag list from drifting away from the enum.
+    #[must_use]
+    pub fn tag(&self) -> &'static str {
+        match self {
+            Message::Insert(_) => "insert",
+            Message::Update(_) => "update",
+            Message::Delete(_) => "delete",
+            Message::BootstrapInsert(_) => "bootstrap-insert",
+            Message::BootstrapStart(_) => "bootstrap-start",
+            Message::BootstrapComplete(_) => "bootstrap-complete",
+            Message::TableCreate(_) => "table-create",
+            Message::TableAlter(_) => "table-alter",
+            Message::TableDrop(_) => "table-drop",
+            Message::DatabaseCreate(_) => "database-create",
+            Message::DatabaseAlter(_) => "database-alter",
+            Message::DatabaseDrop(_) => "database-drop",
+        }
+    }
 }
 
 /// A row change message (insert, update, delete, or bootstrap insert).
@@ -266,6 +289,9 @@ pub struct RowChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -298,6 +324,9 @@ pub struct ControlMessage {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -386,6 +415,9 @@ pub struct TableCreateChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -409,6 +441,9 @@ pub struct TableAlterChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -426,6 +461,9 @@ pub struct TableDropChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -442,6 +480,9 @@ pub struct DatabaseChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -457,6 +498,41 @@ pub struct DatabaseDropChange {
     /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
     /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
     /// added after this crate's last release.
+    ///
+    /// Keys here must not collide with the named fields above. Serializing a colliding key
+    /// writes the JSON object twice over, and the result no longer parses.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{MESSAGE_TAGS, ParseError, parse};
+    use alloc::format;
+
+    /// Every tag in `MESSAGE_TAGS` must name a real variant.
+    ///
+    /// A tag-only document is missing every required field, so a modelled tag fails with
+    /// [`ParseError::Json`]. Getting [`ParseError::UnknownMessageType`] instead means the
+    /// array lists a tag the enum does not have.
+    #[test]
+    fn message_tags_match_the_variants() {
+        for tag in MESSAGE_TAGS {
+            let json = format!(r#"{{"type":"{tag}"}}"#);
+            match parse(&json) {
+                Err(ParseError::Json(_)) => {}
+                Err(ParseError::UnknownMessageType(unknown)) => {
+                    panic!("`{unknown}` is in MESSAGE_TAGS but is not a Message variant")
+                }
+                Ok(message) => panic!("`{tag}` parsed with no fields at all: {message:?}"),
+            }
+        }
+    }
+
+    /// A tag outside the array must be reported as unknown, not as malformed input.
+    #[test]
+    fn a_tag_outside_the_array_is_unknown() {
+        let error = parse(r#"{"type":"table-rename"}"#).expect_err("must not parse");
+        assert!(matches!(error, ParseError::UnknownMessageType(_)));
+    }
 }

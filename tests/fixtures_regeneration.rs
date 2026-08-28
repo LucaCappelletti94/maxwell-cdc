@@ -383,6 +383,9 @@ fn regenerate_fixtures() {
 
     let results = collect(Path::new(&output_path).join("maxwell.jsonl").as_path());
 
-    save_fixtures(&results);
+    // Prune first. If a write or its roundtrip assertion fails part way through, the corpus
+    // is left visibly incomplete rather than silently mixing two Maxwell runs, whose
+    // timestamps, GTIDs and binlog positions would disagree.
     prune_stale_fixtures(&results);
+    save_fixtures(&results);
 }

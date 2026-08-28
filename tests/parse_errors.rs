@@ -117,25 +117,36 @@ fn parse_slice_reports_the_same_failures() {
 /// A bad line must name its line number and must not end the stream.
 #[test]
 fn parse_lines_isolates_a_bad_line() {
+    // The two skipped lines sit BEFORE the bad one on purpose. The bad line is the fourth
+    // line of the stream but only the second with content, so an implementation that
+    // numbered content lines instead of stream lines would report 2 and fail here.
     let stream = concat!(
         r#"{"type":"insert","database":"d","table":"t","data":{"id":1}}"#,
         "\n",
-        "not json\n",
         "\n",
+        "   \n",
+        "not json\n",
         r#"{"type":"delete","database":"d","table":"t","data":{"id":1}}"#,
         "\n"
     );
 
     let results: Vec<_> = parse_lines(stream).collect();
 
-    assert_eq!(results.len(), 3, "the blank line must be skipped");
+    assert_eq!(
+        results.len(),
+        3,
+        "the empty and blank lines must be skipped"
+    );
     assert!(results[0].is_ok());
     assert!(results[2].is_ok(), "a bad line must not end the stream");
 
-    let error = results[1].as_ref().expect_err("line 2 must fail");
-    assert_eq!(error.line, 2);
+    let error = results[1].as_ref().expect_err("the bad line must fail");
+    assert_eq!(
+        error.line, 4,
+        "line numbers must count every line, not just the ones with content"
+    );
     assert!(
-        error.to_string().starts_with("line 2:"),
+        error.to_string().starts_with("line 4:"),
         "error must name its line, got: {error}"
     );
 }
