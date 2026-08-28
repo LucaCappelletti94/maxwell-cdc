@@ -129,8 +129,12 @@ pub fn parse_lines(json: &str) -> impl Iterator<Item = Result<Message, LineError
 }
 
 /// The operation type for row change messages.
+///
+/// Non-exhaustive for the same reason as [`Message`]: a new row-carrying message type would
+/// otherwise make [`Message::op_type`] return a variant that breaks existing matches.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
 pub enum OpType {
     /// Row insertion.
     Insert,
