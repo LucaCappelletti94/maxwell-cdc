@@ -19,7 +19,7 @@ pub fn parse(json: &str) -> Result<Message, serde_json::Error> {
 }
 
 /// The operation type for row change messages.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum OpType {
     /// Row insertion.
@@ -33,7 +33,7 @@ pub enum OpType {
 }
 
 /// A Maxwell CDC message parsed from JSON.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "kebab-case")]
 pub enum Message {
     /// Row insertion into a table.
@@ -63,7 +63,10 @@ pub enum Message {
 }
 
 impl Message {
-    /// Returns the operation type if this is a row change, else None.
+    /// The operation type if this is a row change, else `None`.
+    ///
+    /// Matched exhaustively on purpose: a new row-carrying variant must fail to compile
+    /// here rather than silently report no operation.
     #[must_use]
     pub fn op_type(&self) -> Option<OpType> {
         match self {
@@ -71,13 +74,20 @@ impl Message {
             Message::Update(_) => Some(OpType::Update),
             Message::Delete(_) => Some(OpType::Delete),
             Message::BootstrapInsert(_) => Some(OpType::BootstrapInsert),
-            _ => None,
+            Message::BootstrapStart(_)
+            | Message::BootstrapComplete(_)
+            | Message::TableCreate(_)
+            | Message::TableAlter(_)
+            | Message::TableDrop(_)
+            | Message::DatabaseCreate(_)
+            | Message::DatabaseAlter(_)
+            | Message::DatabaseDrop(_) => None,
         }
     }
 }
 
 /// A row change message (insert, update, delete, or bootstrap insert).
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct RowChange {
     /// Database name.
     pub database: String,
@@ -138,7 +148,7 @@ pub struct RowChange {
 }
 
 /// A control message (bootstrap start/complete).
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ControlMessage {
     /// Database name.
     pub database: String,
@@ -165,7 +175,7 @@ pub struct ControlMessage {
 }
 
 /// Metadata common to DDL messages.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DdlMetadata {
     /// Event timestamp in milliseconds since epoch.
     pub ts: i64,
@@ -183,7 +193,7 @@ pub struct DdlMetadata {
 }
 
 /// A column definition in a table.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ColumnDefinition {
     /// Column name.
     pub name: String,
@@ -205,7 +215,7 @@ pub struct ColumnDefinition {
 }
 
 /// A table definition in a database.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableDefinition {
     /// Database name.
     pub database: String,
@@ -222,7 +232,7 @@ pub struct TableDefinition {
 }
 
 /// A database definition.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseDefinition {
     /// Database name.
     pub database: String,
@@ -232,7 +242,7 @@ pub struct DatabaseDefinition {
 }
 
 /// A table creation message.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableCreateChange {
     /// Database name.
     pub database: String,
@@ -247,7 +257,7 @@ pub struct TableCreateChange {
 }
 
 /// A table alteration message.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableAlterChange {
     /// Database name.
     pub database: String,
@@ -265,7 +275,7 @@ pub struct TableAlterChange {
 }
 
 /// A table drop message.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableDropChange {
     /// Database name.
     pub database: String,
@@ -277,7 +287,7 @@ pub struct TableDropChange {
 }
 
 /// A database creation or alteration message.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseChange {
     /// Database definition.
     #[serde(flatten)]
@@ -288,7 +298,7 @@ pub struct DatabaseChange {
 }
 
 /// A database drop message.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseDropChange {
     /// Database name.
     pub database: String,

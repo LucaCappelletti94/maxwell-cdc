@@ -16,6 +16,24 @@ fn expected_op_type(tag: &str) -> Option<OpType> {
     }
 }
 
+/// `Message` is `Eq + Hash`, so consumers can deduplicate a stream through a set.
+#[test]
+fn messages_deduplicate_through_a_hash_set() {
+    let fixtures = support::all();
+
+    let mut seen = std::collections::HashSet::new();
+    for (name, raw) in &fixtures {
+        let message = parse(raw).expect("parse message");
+        assert!(
+            seen.insert(message.clone()),
+            "{name}: distinct message collided"
+        );
+        assert!(!seen.insert(message), "{name}: duplicate was not detected");
+    }
+
+    assert_eq!(seen.len(), fixtures.len());
+}
+
 /// Reserializing a parsed message must reproduce every field Maxwell emitted.
 ///
 /// The fixtures are the raw lines Maxwell wrote, so a field this crate does not model shows
