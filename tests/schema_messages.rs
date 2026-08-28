@@ -101,6 +101,34 @@ fn table_alter_has_typed_old_and_new_definitions() {
     assert_metadata(&change.metadata, sql);
 }
 
+/// Maxwell writes `column-length` as a Java `Long`, so a value past `u32::MAX` must parse.
+#[test]
+fn column_length_accepts_the_full_upstream_range() {
+    let json = r#"{
+        "type":"table-create",
+        "database":"test",
+        "table":"events",
+        "def":{
+            "database":"test",
+            "table":"events",
+            "columns":[{"type":"datetime","name":"at","column-length":4294967296}],
+            "primary-key":[]
+        },
+        "ts":1477053308000,
+        "sql":"create table test.events (at datetime(6))"
+    }"#;
+
+    let message = parse(json).expect("a Long column-length must parse");
+    let Message::TableCreate(change) = message else {
+        panic!("expected table create");
+    };
+
+    assert_eq!(
+        change.definition.columns[0].column_length,
+        Some(4_294_967_296)
+    );
+}
+
 #[test]
 fn table_drop_has_no_definition() {
     let sql = "drop table test.events";

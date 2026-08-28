@@ -337,9 +337,10 @@ pub struct ColumnDefinition {
     /// Enum values for ENUM columns.
     #[serde(rename = "enum-values", skip_serializing_if = "Option::is_none")]
     pub enum_values: Option<Vec<String>>,
-    /// Column length specification for DATETIME.
+    /// Fractional-second precision, on the types that carry one (`DATETIME`, `TIMESTAMP`,
+    /// `TIME`). An `i64` because Maxwell writes a Java `Long`, though real values are 0 to 6.
     #[serde(rename = "column-length", skip_serializing_if = "Option::is_none")]
-    pub column_length: Option<u32>,
+    pub column_length: Option<i64>,
 }
 
 /// A table definition in a database.
