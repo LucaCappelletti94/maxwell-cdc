@@ -1,0 +1,92 @@
+{
+  "database": "testdb",
+  "def": {
+    "charset": "utf8mb4",
+    "columns": [
+      {
+        "name": "id",
+        "signed": false,
+        "type": "bigint"
+      },
+      {
+        "charset": "utf8mb4",
+        "name": "nullable_text",
+        "type": "varchar"
+      },
+      {
+        "column-length": 6,
+        "name": "happened_at",
+        "type": "datetime"
+      },
+      {
+        "name": "amount",
+        "signed": true,
+        "type": "int"
+      },
+      {
+        "enum-values": [
+          "open",
+          "closed"
+        ],
+        "name": "status",
+        "type": "enum"
+      },
+      {
+        "enum-values": [
+          "one",
+          "two"
+        ],
+        "name": "tags",
+        "type": "set"
+      }
+    ],
+    "database": "testdb",
+    "primary-key": [
+      "id"
+    ],
+    "table": "capture_events"
+  },
+  "old": {
+    "charset": "utf8mb4",
+    "columns": [
+      {
+        "name": "id",
+        "signed": false,
+        "type": "bigint"
+      },
+      {
+        "charset": "utf8mb4",
+        "name": "nullable_text",
+        "type": "varchar"
+      },
+      {
+        "column-length": 6,
+        "name": "happened_at",
+        "type": "datetime"
+      },
+      {
+        "name": "amount",
+        "signed": true,
+        "type": "int"
+      },
+      {
+        "enum-values": [
+          "open",
+          "closed"
+        ],
+        "name": "status",
+        "type": "enum"
+      }
+    ],
+    "database": "testdb",
+    "primary-key": [
+      "id"
+    ],
+    "table": "capture_events"
+  },
+  "position": "mysql-bin.000003:113952",
+  "sql": "ALTER TABLE capture_events ADD COLUMN tags SET('one','two')",
+  "table": "capture_events",
+  "ts": 1787912343000,
+  "type": "table-alter"
+}

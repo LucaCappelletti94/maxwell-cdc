@@ -1,0 +1,9 @@
+{
+  "data": {},
+  "database": "testdb",
+  "primary_key": [],
+  "primary_key_columns": [],
+  "table": "capture_events",
+  "ts": 1787912343,
+  "type": "bootstrap-complete"
+}

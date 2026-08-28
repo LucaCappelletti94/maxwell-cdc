@@ -1,0 +1,19 @@
+{
+  "data": {
+    "amount": 3,
+    "happened_at": "2026-08-28 14:03:02.123456",
+    "id": 9223372036854775809,
+    "nullable_text": "bootstrap",
+    "status": "closed"
+  },
+  "database": "testdb",
+  "primary_key": [
+    9223372036854775809
+  ],
+  "primary_key_columns": [
+    "id"
+  ],
+  "table": "capture_events",
+  "ts": 1787912343,
+  "type": "bootstrap-insert"
+}

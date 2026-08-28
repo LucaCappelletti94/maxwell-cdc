@@ -1,0 +1,46 @@
+{
+  "database": "testdb",
+  "def": {
+    "charset": "utf8mb4",
+    "columns": [
+      {
+        "name": "id",
+        "signed": false,
+        "type": "bigint"
+      },
+      {
+        "charset": "utf8mb4",
+        "name": "nullable_text",
+        "type": "varchar"
+      },
+      {
+        "column-length": 6,
+        "name": "happened_at",
+        "type": "datetime"
+      },
+      {
+        "name": "amount",
+        "signed": true,
+        "type": "int"
+      },
+      {
+        "enum-values": [
+          "open",
+          "closed"
+        ],
+        "name": "status",
+        "type": "enum"
+      }
+    ],
+    "database": "testdb",
+    "primary-key": [
+      "id"
+    ],
+    "table": "capture_events"
+  },
+  "position": "mysql-bin.000003:107359",
+  "sql": "CREATE TABLE capture_events (\n            id BIGINT UNSIGNED NOT NULL PRIMARY KEY,\n            nullable_text VARCHAR(255),\n            happened_at DATETIME(6),\n            amount INT,\n            status ENUM('open', 'closed')\n        )",
+  "table": "capture_events",
+  "ts": 1787912342000,
+  "type": "table-create"
+}

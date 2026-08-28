@@ -1,0 +1,271 @@
+#![no_std]
+#![doc = include_str!("../README.md")]
+
+extern crate alloc;
+
+use alloc::collections::BTreeMap;
+use alloc::string::String;
+use alloc::vec::Vec;
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
+
+/// Parse a Maxwell CDC JSON string into a typed message.
+///
+/// # Errors
+///
+/// Returns an error if the JSON is invalid or does not conform to the Maxwell CDC message schema.
+pub fn parse(json: &str) -> Result<Message, serde_json::Error> {
+    serde_json::from_str(json)
+}
+
+/// The operation type for row change messages.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum OpType {
+    /// Row insertion.
+    Insert,
+    /// Row update.
+    Update,
+    /// Row deletion.
+    Delete,
+    /// Bootstrap row insert (initial snapshot).
+    BootstrapInsert,
+}
+
+/// A Maxwell CDC message parsed from JSON.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "type", rename_all = "kebab-case")]
+pub enum Message {
+    /// Row insertion into a table.
+    Insert(RowChange),
+    /// Row update in a table.
+    Update(RowChange),
+    /// Row deletion from a table.
+    Delete(RowChange),
+    /// Row inserted during bootstrap (initial snapshot).
+    BootstrapInsert(RowChange),
+    /// Start of bootstrap period for a table.
+    BootstrapStart(ControlMessage),
+    /// End of bootstrap period for a table.
+    BootstrapComplete(ControlMessage),
+    /// Table created.
+    TableCreate(TableCreateChange),
+    /// Table altered.
+    TableAlter(TableAlterChange),
+    /// Table dropped.
+    TableDrop(TableDropChange),
+    /// Database created.
+    DatabaseCreate(DatabaseChange),
+    /// Database altered.
+    DatabaseAlter(DatabaseChange),
+    /// Database dropped.
+    DatabaseDrop(DatabaseDropChange),
+}
+
+impl Message {
+    /// Returns the operation type if this is a row change, else None.
+    #[must_use]
+    pub fn op_type(&self) -> Option<OpType> {
+        match self {
+            Message::Insert(_) => Some(OpType::Insert),
+            Message::Update(_) => Some(OpType::Update),
+            Message::Delete(_) => Some(OpType::Delete),
+            Message::BootstrapInsert(_) => Some(OpType::BootstrapInsert),
+            _ => None,
+        }
+    }
+}
+
+/// A row change message (insert, update, delete, or bootstrap insert).
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RowChange {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// Transaction timestamp in seconds since epoch.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ts: Option<i64>,
+    /// Transaction ID.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub xid: Option<i64>,
+    /// Whether the transaction was committed.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub commit: Option<bool>,
+    /// Binlog position (filename:offset).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub position: Option<String>,
+    /// MySQL server ID.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub server_id: Option<i64>,
+    /// Thread ID.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub thread_id: Option<i64>,
+    /// Primary key values.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_key: Option<Vec<Value>>,
+    /// Primary key column names.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_key_columns: Option<Vec<String>>,
+    /// Current row data as JSON object.
+    pub data: BTreeMap<String, Value>,
+    /// Previous row data (for updates only).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub old: Option<BTreeMap<String, Value>>,
+    /// Column type information.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub columns_types: Option<BTreeMap<String, String>>,
+}
+
+/// A control message (bootstrap start/complete).
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ControlMessage {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// Event timestamp in seconds since epoch.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ts: Option<i64>,
+    /// Event data (typically empty for control messages).
+    pub data: BTreeMap<String, Value>,
+    /// Primary key values.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_key: Option<Vec<Value>>,
+    /// Primary key column names.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_key_columns: Option<Vec<String>>,
+}
+
+/// Metadata common to DDL messages.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DdlMetadata {
+    /// Event timestamp in milliseconds since epoch.
+    pub ts: i64,
+    /// The DDL SQL statement.
+    pub sql: String,
+    /// Binlog position (filename:offset).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub position: Option<String>,
+    /// Global transaction ID.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub gtid: Option<String>,
+    /// Schema ID.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub schema_id: Option<i64>,
+}
+
+/// A column definition in a table.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ColumnDefinition {
+    /// Column name.
+    pub name: String,
+    /// Column data type.
+    #[serde(rename = "type")]
+    pub column_type: String,
+    /// Character set for text columns.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub charset: Option<String>,
+    /// Whether the column is signed (for numeric types).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub signed: Option<bool>,
+    /// Enum values for ENUM columns.
+    #[serde(rename = "enum-values", skip_serializing_if = "Option::is_none")]
+    pub enum_values: Option<Vec<String>>,
+    /// Column length specification for DATETIME.
+    #[serde(rename = "column-length", skip_serializing_if = "Option::is_none")]
+    pub column_length: Option<u32>,
+}
+
+/// A table definition in a database.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TableDefinition {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// Table character set.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub charset: Option<String>,
+    /// Primary key column names.
+    #[serde(rename = "primary-key")]
+    pub primary_key: Vec<String>,
+    /// Column definitions.
+    pub columns: Vec<ColumnDefinition>,
+}
+
+/// A database definition.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DatabaseDefinition {
+    /// Database name.
+    pub database: String,
+    /// Database character set.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub charset: Option<String>,
+}
+
+/// A table creation message.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TableCreateChange {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// New table definition.
+    #[serde(rename = "def")]
+    pub definition: TableDefinition,
+    /// DDL metadata.
+    #[serde(flatten)]
+    pub metadata: DdlMetadata,
+}
+
+/// A table alteration message.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TableAlterChange {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// Old table definition before alteration.
+    #[serde(rename = "old")]
+    pub old_definition: TableDefinition,
+    /// New table definition after alteration.
+    #[serde(rename = "def")]
+    pub definition: TableDefinition,
+    /// DDL metadata.
+    #[serde(flatten)]
+    pub metadata: DdlMetadata,
+}
+
+/// A table drop message.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TableDropChange {
+    /// Database name.
+    pub database: String,
+    /// Table name.
+    pub table: String,
+    /// DDL metadata.
+    #[serde(flatten)]
+    pub metadata: DdlMetadata,
+}
+
+/// A database creation or alteration message.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DatabaseChange {
+    /// Database definition.
+    #[serde(flatten)]
+    pub definition: DatabaseDefinition,
+    /// DDL metadata.
+    #[serde(flatten)]
+    pub metadata: DdlMetadata,
+}
+
+/// A database drop message.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DatabaseDropChange {
+    /// Database name.
+    pub database: String,
+    /// DDL metadata.
+    #[serde(flatten)]
+    pub metadata: DdlMetadata,
+}

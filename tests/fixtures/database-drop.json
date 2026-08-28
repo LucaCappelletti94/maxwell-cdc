@@ -1,0 +1,7 @@
+{
+  "database": "archive_capture",
+  "position": "mysql-bin.000003:107143",
+  "sql": "DROP DATABASE archive_capture",
+  "ts": 1787912342000,
+  "type": "database-drop"
+}

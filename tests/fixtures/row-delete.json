@@ -1,0 +1,24 @@
+{
+  "commit": true,
+  "data": {
+    "amount": 2,
+    "happened_at": "2026-08-28 14:03:02.123456",
+    "id": 9223372036854775808,
+    "nullable_text": "filled",
+    "status": "open"
+  },
+  "database": "testdb",
+  "position": "mysql-bin.000003:108606",
+  "primary_key": [
+    9223372036854775808
+  ],
+  "primary_key_columns": [
+    "id"
+  ],
+  "server_id": 1,
+  "table": "capture_events",
+  "thread_id": 24,
+  "ts": 1787912342,
+  "type": "delete",
+  "xid": 383
+}

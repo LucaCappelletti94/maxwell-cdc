@@ -1,0 +1,8 @@
+{
+  "charset": "utf8mb4",
+  "database": "archive_capture",
+  "position": "mysql-bin.000003:106689",
+  "sql": "CREATE DATABASE archive_capture",
+  "ts": 1787912342000,
+  "type": "database-create"
+}
