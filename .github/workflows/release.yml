@@ -57,7 +57,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.85
-      - run: cargo check --all-features --locked
+        # rust-version is a contract for consumers of the library, so only the library is
+        # checked. The dev-dependencies (criterion, testcontainers) need a newer toolchain.
+      - run: cargo check --lib --locked
 
   no-std:
     name: No std

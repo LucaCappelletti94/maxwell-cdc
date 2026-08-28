@@ -1,9 +1,1 @@
-{
-  "data": {},
-  "database": "testdb",
-  "primary_key": [],
-  "primary_key_columns": [],
-  "table": "capture_events",
-  "ts": 1787912343,
-  "type": "bootstrap-complete"
-}
+{"database":"testdb","table":"capture_events","type":"bootstrap-complete","ts":1787934491,"push_ts":1787934491.75254,"comment":"captured for the maxwell-cdc fixture corpus","primary_key":[],"primary_key_columns":[],"data":{}}

@@ -10,6 +10,8 @@ fn bootstrap_start_preserves_control_fields() {
         "table":"orders",
         "type":"bootstrap-start",
         "ts":1450557744,
+        "push_ts":1450557744.987654,
+        "comment":"nightly resync",
         "data":{}
     }"#;
 
@@ -21,6 +23,14 @@ fn bootstrap_start_preserves_control_fields() {
     assert_eq!(control.database, "shop");
     assert_eq!(control.table, "orders");
     assert_eq!(control.ts, Some(1_450_557_744));
+    assert_eq!(
+        control
+            .push_ts
+            .as_ref()
+            .and_then(serde_json::Number::as_f64),
+        Some(1_450_557_744.987_654)
+    );
+    assert_eq!(control.comment.as_deref(), Some("nightly resync"));
     assert!(control.data.is_empty());
 }
 

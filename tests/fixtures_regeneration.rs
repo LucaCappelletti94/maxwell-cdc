@@ -1,4 +1,8 @@
 //! Regenerate Maxwell CDC fixtures by executing the exact captured operation matrix.
+//!
+//! Fixtures are written as the verbatim lines Maxwell emitted. Reserializing them through
+//! `serde_json::Value` would sort the keys and hide the wire order, which would make the
+//! corpus a mirror of this crate's own output instead of an independent record.
 
 use chrono::NaiveDateTime;
 use diesel::connection::SimpleConnection;
@@ -31,6 +35,7 @@ mod tables {
                 id -> BigInt,
                 database_name -> Varchar,
                 table_name -> Varchar,
+                comment -> Nullable<Varchar>,
             }
         }
     }
@@ -38,6 +43,37 @@ mod tables {
 
 const FIRST_ID: u64 = 9_223_372_036_854_775_808;
 const SECOND_ID: u64 = 9_223_372_036_854_775_809;
+/// Non-final row of a multi-statement transaction, which is the only row that carries
+/// `xoffset` and omits `commit`.
+const THIRD_ID: u64 = 9_223_372_036_854_775_810;
+/// Final row of that transaction, which carries `commit` instead.
+const FOURTH_ID: u64 = 9_223_372_036_854_775_811;
+
+const BOOTSTRAP_COMMENT: &str = "captured for the maxwell-cdc fixture corpus";
+
+/// Container startup budget. Generous because this machine often runs other container
+/// suites concurrently, and a contended daemon takes minutes to bring MySQL up.
+const CONTAINER_STARTUP: Duration = Duration::from_secs(300);
+
+/// Budget for a set of expected events to appear in the output file.
+const EVENT_DEADLINE: Duration = Duration::from_secs(120);
+
+/// Fixture names the corpus must contain, and the message shape each one records.
+const EXPECTED: &[&str] = &[
+    "row-insert",
+    "row-update",
+    "row-delete",
+    "row-insert-uncommitted",
+    "bootstrap-start",
+    "bootstrap-insert",
+    "bootstrap-complete",
+    "table-create",
+    "table-alter",
+    "table-drop",
+    "database-create",
+    "database-alter",
+    "database-drop",
+];
 
 fn execute_ddl(conn: &mut MysqlConnection, sql: &str) {
     // Diesel has no DDL query builder, and MySQL rejects prepared DDL.
@@ -45,7 +81,7 @@ fn execute_ddl(conn: &mut MysqlConnection, sql: &str) {
 }
 
 fn wait_for_bootstrap(path: &Path) {
-    let deadline = std::time::Instant::now() + Duration::from_secs(60);
+    let deadline = std::time::Instant::now() + EVENT_DEADLINE;
     loop {
         if path.exists() {
             if let Ok(content) = fs::read_to_string(path) {
@@ -70,9 +106,41 @@ fn wait_for_bootstrap(path: &Path) {
     }
 }
 
-fn collect(path: &Path) -> BTreeMap<String, serde_json::Value> {
-    let mut results: BTreeMap<String, serde_json::Value> = BTreeMap::new();
-    let deadline = std::time::Instant::now() + Duration::from_secs(60);
+/// Classify one emitted line into a fixture name, or `None` to ignore it.
+fn classify(val: &serde_json::Value) -> Option<&'static str> {
+    let msg_type = val.get("type").and_then(|v| v.as_str()).unwrap_or("");
+    let database = val.get("database").and_then(|v| v.as_str()).unwrap_or("");
+    let table = val.get("table").and_then(|v| v.as_str()).unwrap_or("");
+    let id = val
+        .get("data")
+        .and_then(|d| d.get("id"))
+        .and_then(serde_json::Value::as_u64);
+
+    match (msg_type, database, table, id) {
+        ("insert", "testdb", "capture_events", Some(FIRST_ID)) => Some("row-insert"),
+        ("update", "testdb", "capture_events", Some(FIRST_ID)) => Some("row-update"),
+        ("delete", "testdb", "capture_events", Some(FIRST_ID)) => Some("row-delete"),
+        ("insert", "testdb", "capture_events", Some(THIRD_ID)) => Some("row-insert-uncommitted"),
+        ("bootstrap-start", "testdb", "capture_events", None) => Some("bootstrap-start"),
+        ("bootstrap-insert", "testdb", "capture_events", Some(SECOND_ID)) => {
+            Some("bootstrap-insert")
+        }
+        ("bootstrap-complete", "testdb", "capture_events", None) => Some("bootstrap-complete"),
+        ("table-create", "testdb", "capture_events", None) => Some("table-create"),
+        ("table-alter", "testdb", "capture_events", None) => Some("table-alter"),
+        ("table-drop", "testdb", "capture_events", None) => Some("table-drop"),
+        ("database-create", "archive_capture", "", None) => Some("database-create"),
+        ("database-alter", "archive_capture", "", None) => Some("database-alter"),
+        ("database-drop", "archive_capture", "", None) => Some("database-drop"),
+        _ => None,
+    }
+}
+
+/// Poll the output file until every expected message type has appeared, then return the
+/// verbatim line for each.
+fn collect(path: &Path) -> BTreeMap<&'static str, String> {
+    let mut results: BTreeMap<&'static str, String> = BTreeMap::new();
+    let deadline = std::time::Instant::now() + EVENT_DEADLINE;
 
     loop {
         results.clear();
@@ -81,76 +149,24 @@ fn collect(path: &Path) -> BTreeMap<String, serde_json::Value> {
             if let Ok(content) = fs::read_to_string(path) {
                 for line in content.lines() {
                     if let Ok(val) = serde_json::from_str::<serde_json::Value>(line) {
-                        let msg_type = val.get("type").and_then(|v| v.as_str()).unwrap_or("");
-                        let database = val.get("database").and_then(|v| v.as_str()).unwrap_or("");
-                        let table = val.get("table").and_then(|v| v.as_str()).unwrap_or("");
-                        let id = val.get("data").and_then(|d| d.get("id"));
-
-                        let fixture_name = match (msg_type, database, table, id) {
-                            ("insert", "testdb", "capture_events", Some(id_val))
-                                if id_val.as_u64() == Some(FIRST_ID) =>
-                            {
-                                "row-insert"
-                            }
-                            ("update", "testdb", "capture_events", Some(id_val))
-                                if id_val.as_u64() == Some(FIRST_ID) =>
-                            {
-                                "row-update"
-                            }
-                            ("delete", "testdb", "capture_events", Some(id_val))
-                                if id_val.as_u64() == Some(FIRST_ID) =>
-                            {
-                                "row-delete"
-                            }
-                            ("bootstrap-start", "testdb", "capture_events", None) => {
-                                "bootstrap-start"
-                            }
-                            ("bootstrap-insert", "testdb", "capture_events", Some(id_val))
-                                if id_val.as_u64() == Some(SECOND_ID) =>
-                            {
-                                "bootstrap-insert"
-                            }
-                            ("bootstrap-complete", "testdb", "capture_events", None) => {
-                                "bootstrap-complete"
-                            }
-                            ("table-create", "testdb", "capture_events", None) => "table-create",
-                            ("table-alter", "testdb", "capture_events", None) => "table-alter",
-                            ("table-drop", "testdb", "capture_events", None) => "table-drop",
-                            ("database-create", "archive_capture", "", None) => "database-create",
-                            ("database-alter", "archive_capture", "", None) => "database-alter",
-                            ("database-drop", "archive_capture", "", None) => "database-drop",
-                            _ => continue,
-                        };
-
-                        results.insert(fixture_name.to_string(), val);
+                        if let Some(name) = classify(&val) {
+                            results.insert(name, line.to_owned());
+                        }
                     }
                 }
             }
         }
 
-        let expected = [
-            "row-insert",
-            "row-update",
-            "row-delete",
-            "bootstrap-start",
-            "bootstrap-insert",
-            "bootstrap-complete",
-            "table-create",
-            "table-alter",
-            "table-drop",
-            "database-create",
-            "database-alter",
-            "database-drop",
-        ];
-
-        if expected.iter().all(|name| results.contains_key(*name)) {
+        if EXPECTED.iter().all(|name| results.contains_key(name)) {
             return results;
         }
 
         assert!(
             std::time::Instant::now() < deadline,
-            "timed out waiting for all 12 event types at {}",
-            path.display()
+            "timed out waiting for {} message types at {}, have {:?}",
+            EXPECTED.len(),
+            path.display(),
+            results.keys().collect::<Vec<_>>()
         );
         thread::sleep(Duration::from_millis(200));
     }
@@ -181,10 +197,15 @@ fn setup_containers(
             "--log-bin=mysql-bin",
             "--binlog-format=ROW",
             "--binlog-row-image=FULL",
+            // Populates the `gtid` field.
+            "--gtid-mode=ON",
+            "--enforce-gtid-consistency=ON",
+            // Populates the `query` field, which output_row_query depends on.
+            "--binlog-rows-query-log-events=ON",
         ])
         .with_network(&network)
         .with_container_name(&mysql_name)
-        .with_startup_timeout(Duration::from_secs(120))
+        .with_startup_timeout(CONTAINER_STARTUP)
         .start()
         .unwrap_or_else(|e| panic!("start mysql: {e}"));
 
@@ -206,17 +227,43 @@ fn setup_containers(
             "--output_primary_key_columns=true",
             "--output_server_id=true",
             "--output_thread_id=true",
+            // Maxwell rejects output_gtid_position unless it is itself in GTID mode.
+            "--gtid_mode=true",
+            // Every remaining optional field, so the corpus covers the whole row shape.
+            "--output_gtid_position=true",
+            "--output_xoffset=true",
+            "--output_schema_id=true",
+            "--output_row_query=true",
+            "--output_push_timestamp=true",
             &host_flag,
             "--port=3306",
             "--user=root",
             "--password=subql_test",
             "--bootstrapper=sync",
         ])
-        .with_startup_timeout(Duration::from_secs(90))
+        .with_startup_timeout(CONTAINER_STARTUP)
         .start()
         .unwrap_or_else(|e| panic!("start maxwell: {e}"));
 
     (output_path, mysql_url, mysql, maxwell, output_dir)
+}
+
+fn captured_datetime() -> NaiveDateTime {
+    NaiveDateTime::parse_from_str("2026-08-28 14:03:02.123456", "%Y-%m-%d %H:%M:%S%.f")
+        .expect("datetime")
+}
+
+fn insert_row(conn: &mut MysqlConnection, id: u64, text: Option<&str>, amount: i32, status: &str) {
+    diesel::insert_into(tables::capture_events::table)
+        .values((
+            tables::capture_events::id.eq(id),
+            tables::capture_events::nullable_text.eq(text.map(str::to_owned)),
+            tables::capture_events::happened_at.eq(captured_datetime()),
+            tables::capture_events::amount.eq(amount),
+            tables::capture_events::status.eq(status),
+        ))
+        .execute(conn)
+        .unwrap_or_else(|e| panic!("insert {id}: {e}"));
 }
 
 fn run_operations(conn: &mut MysqlConnection, output_path: &Path) {
@@ -235,67 +282,41 @@ fn run_operations(conn: &mut MysqlConnection, output_path: &Path) {
         )",
     );
 
-    {
-        let now =
-            NaiveDateTime::parse_from_str("2026-08-28 14:03:02.123456", "%Y-%m-%d %H:%M:%S%.f")
-                .expect("datetime");
-        diesel::insert_into(tables::capture_events::table)
-            .values((
-                tables::capture_events::id.eq(FIRST_ID),
-                tables::capture_events::nullable_text.eq::<Option<String>>(None),
-                tables::capture_events::happened_at.eq(now),
-                tables::capture_events::amount.eq(1),
-                tables::capture_events::status.eq("open"),
-            ))
-            .execute(conn)
-            .expect("insert first");
-    }
+    insert_row(conn, FIRST_ID, None, 1, "open");
 
-    {
-        diesel::update(
-            tables::capture_events::table.filter(tables::capture_events::id.eq(FIRST_ID)),
-        )
+    diesel::update(tables::capture_events::table.filter(tables::capture_events::id.eq(FIRST_ID)))
         .set((
             tables::capture_events::nullable_text.eq("filled"),
             tables::capture_events::amount.eq(2),
         ))
         .execute(conn)
         .expect("update first");
-    }
 
-    {
-        diesel::delete(
-            tables::capture_events::table.filter(tables::capture_events::id.eq(FIRST_ID)),
-        )
+    diesel::delete(tables::capture_events::table.filter(tables::capture_events::id.eq(FIRST_ID)))
         .execute(conn)
         .expect("delete first");
-    }
 
-    {
-        let now =
-            NaiveDateTime::parse_from_str("2026-08-28 14:03:02.123456", "%Y-%m-%d %H:%M:%S%.f")
-                .expect("datetime");
-        diesel::insert_into(tables::capture_events::table)
-            .values((
-                tables::capture_events::id.eq(SECOND_ID),
-                tables::capture_events::nullable_text.eq("bootstrap"),
-                tables::capture_events::happened_at.eq(now),
-                tables::capture_events::amount.eq(3),
-                tables::capture_events::status.eq("closed"),
-            ))
-            .execute(conn)
-            .expect("insert second");
-    }
+    insert_row(conn, SECOND_ID, Some("bootstrap"), 3, "closed");
 
     diesel::insert_into(tables::maxwell::bootstrap::table)
         .values((
             tables::maxwell::bootstrap::database_name.eq("testdb"),
             tables::maxwell::bootstrap::table_name.eq("capture_events"),
+            tables::maxwell::bootstrap::comment.eq(BOOTSTRAP_COMMENT),
         ))
         .execute(conn)
         .expect("insert bootstrap");
 
     wait_for_bootstrap(Path::new(output_path).join("maxwell.jsonl").as_path());
+
+    // Two rows in one transaction: the first is uncommitted and carries `xoffset`, the
+    // second carries `commit`. A single-statement autocommit insert produces neither.
+    conn.transaction::<_, diesel::result::Error, _>(|conn| {
+        insert_row(conn, THIRD_ID, Some("uncommitted"), 4, "open");
+        insert_row(conn, FOURTH_ID, Some("committed"), 5, "closed");
+        Ok(())
+    })
+    .expect("multi row transaction");
 
     execute_ddl(
         conn,
@@ -305,22 +326,47 @@ fn run_operations(conn: &mut MysqlConnection, output_path: &Path) {
     execute_ddl(conn, "DROP TABLE capture_events");
 }
 
-fn save_fixtures(results: &BTreeMap<String, serde_json::Value>) {
-    for (name, val) in results {
+/// Write each captured line verbatim, and prove the crate reaches a fixed point on it.
+fn save_fixtures(results: &BTreeMap<&'static str, String>) {
+    for (name, raw) in results {
         let filename = format!("tests/fixtures/{name}.json");
-        let json_str = serde_json::to_string_pretty(val).expect("serialize json");
-
-        fs::write(&filename, format!("{json_str}\n"))
+        fs::write(&filename, format!("{raw}\n"))
             .unwrap_or_else(|e| panic!("write fixture {filename}: {e}"));
 
-        let serialized_msg = serde_json::to_string(val).expect("serialize json");
-        let parsed = maxwell_cdc::parse(&serialized_msg).expect("parse json");
+        let parsed = maxwell_cdc::parse(raw).unwrap_or_else(|e| panic!("parse {name}: {e}"));
         let serialized = serde_json::to_string(&parsed).expect("serialize message");
         let reparsed: maxwell_cdc::Message =
-            maxwell_cdc::parse(&serialized).expect("reparse message");
+            maxwell_cdc::parse(&serialized).unwrap_or_else(|e| panic!("reparse {name}: {e}"));
         assert_eq!(parsed, reparsed, "message roundtrip mismatch for {name}");
+
+        let original: serde_json::Value = serde_json::from_str(raw).expect("parse raw");
+        let round_tripped: serde_json::Value =
+            serde_json::from_str(&serialized).expect("parse serialized");
+        assert_eq!(
+            round_tripped, original,
+            "{name}: this crate dropped or invented a field Maxwell emitted"
+        );
     }
 }
+
+/// Remove fixtures no longer produced, so a stale file cannot outlive the matrix.
+fn prune_stale_fixtures(results: &BTreeMap<&'static str, String>) {
+    for entry in fs::read_dir("tests/fixtures").expect("read fixture dir") {
+        let path = entry.expect("dir entry").path();
+        if path.extension().is_none_or(|ext| ext != "json") {
+            continue;
+        }
+        let stem = path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .expect("fixture stem")
+            .to_owned();
+        if !results.contains_key(stem.as_str()) {
+            fs::remove_file(&path).unwrap_or_else(|e| panic!("remove {}: {e}", path.display()));
+        }
+    }
+}
+
 #[test]
 #[ignore = "expensive test: requires docker, mysql, maxwell"]
 fn regenerate_fixtures() {
@@ -338,11 +384,5 @@ fn regenerate_fixtures() {
     let results = collect(Path::new(&output_path).join("maxwell.jsonl").as_path());
 
     save_fixtures(&results);
-
-    assert_eq!(
-        results.len(),
-        12,
-        "expected 12 event types, got {}",
-        results.len()
-    );
+    prune_stale_fixtures(&results);
 }

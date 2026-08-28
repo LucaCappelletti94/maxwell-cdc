@@ -18,7 +18,6 @@ serde_json = { version = "1", default-features = false, features = ["alloc"] }
 [dev-dependencies]
 criterion = "0.8"
 diesel = { version = "2.2", features = ["mysql", "chrono"] }
-proptest = "1"
 tempfile = "3"
 stats_alloc = "0.1"
 testcontainers = { version = "0.27", features = ["blocking"] }

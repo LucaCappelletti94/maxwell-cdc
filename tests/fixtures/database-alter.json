@@ -1,8 +1,1 @@
-{
-  "charset": "latin1",
-  "database": "archive_capture",
-  "position": "mysql-bin.000003:106907",
-  "sql": "ALTER DATABASE archive_capture CHARACTER SET latin1",
-  "ts": 1787912342000,
-  "type": "database-alter"
-}
+{"type":"database-alter","database":"archive_capture","charset":"latin1","ts":1787934489000,"sql":"ALTER DATABASE archive_capture CHARACTER SET latin1","position":"mysql-bin.000003:211624","gtid":"55023ccd-a2fd-11f1-ae00-f6b128d282a9:20","schema_id":3}
