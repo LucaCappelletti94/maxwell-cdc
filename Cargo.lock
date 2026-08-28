@@ -1242,6 +1242,7 @@ dependencies = [
  "stats_alloc",
  "tempfile",
  "testcontainers",
+ "thiserror",
 ]
 
 [[package]]

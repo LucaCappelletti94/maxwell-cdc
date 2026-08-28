@@ -14,6 +14,7 @@ categories = ["database", "encoding", "no-std"]
 [dependencies]
 serde = { version = "1", default-features = false, features = ["alloc", "derive"] }
 serde_json = { version = "1", default-features = false, features = ["alloc"] }
+thiserror = { version = "2", default-features = false }
 
 [dev-dependencies]
 criterion = "0.8"

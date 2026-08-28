@@ -3,19 +3,129 @@
 
 extern crate alloc;
 
-use alloc::collections::BTreeMap;
-use alloc::string::String;
+use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 use serde::{Deserialize, Serialize};
-use serde_json::{Number, Value};
+use serde_json::{Map, Number, Value};
+use thiserror::Error;
+
+/// Every `type` tag Maxwell emits, in [`Message`] variant order.
+///
+/// Used only to tell an unrecognised message type apart from malformed input, which
+/// `serde_json` reports as the same error category.
+const MESSAGE_TAGS: [&str; 12] = [
+    "insert",
+    "update",
+    "delete",
+    "bootstrap-insert",
+    "bootstrap-start",
+    "bootstrap-complete",
+    "table-create",
+    "table-alter",
+    "table-drop",
+    "database-create",
+    "database-alter",
+    "database-drop",
+];
+
+/// Why a Maxwell message failed to parse.
+#[derive(Debug, Error)]
+pub enum ParseError {
+    /// The message carries a `type` this crate does not model, most likely because it was
+    /// added by a newer Maxwell. Callers tailing a stream may choose to skip these.
+    #[error("unrecognised Maxwell message type `{0}`")]
+    UnknownMessageType(String),
+    /// The input is not valid JSON, or is not a valid message of its declared type.
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+}
+
+/// A parse failure at a known line of a JSON Lines stream.
+#[derive(Debug, Error)]
+#[error("line {line}: {source}")]
+pub struct LineError {
+    /// Line number, counting from one.
+    pub line: usize,
+    /// The underlying failure.
+    #[source]
+    pub source: ParseError,
+}
+
+/// Distinguish an unrecognised `type` tag from every other data error.
+fn classify(json_error: serde_json::Error, tag: Option<&str>) -> ParseError {
+    match tag {
+        Some(tag) if !MESSAGE_TAGS.contains(&tag) => {
+            ParseError::UnknownMessageType(tag.to_string())
+        }
+        _ => ParseError::Json(json_error),
+    }
+}
+
+/// Read the `type` tag without committing to a message shape.
+fn peek_tag(value: &Value) -> Option<&str> {
+    value.get("type")?.as_str()
+}
 
 /// Parse a Maxwell CDC JSON string into a typed message.
 ///
 /// # Errors
 ///
-/// Returns an error if the JSON is invalid or does not conform to the Maxwell CDC message schema.
-pub fn parse(json: &str) -> Result<Message, serde_json::Error> {
-    serde_json::from_str(json)
+/// [`ParseError::UnknownMessageType`] when the `type` tag is not one this crate models, and
+/// [`ParseError::Json`] when the input is not valid JSON or not a valid message of its type.
+pub fn parse(json: &str) -> Result<Message, ParseError> {
+    match serde_json::from_str(json) {
+        Ok(message) => Ok(message),
+        Err(e) => Err(match serde_json::from_str::<Value>(json) {
+            Ok(value) => classify(e, peek_tag(&value)),
+            Err(_) => ParseError::Json(e),
+        }),
+    }
+}
+
+/// Parse a Maxwell CDC JSON message from bytes.
+///
+/// Prefer this over [`parse`] when the input is already a byte buffer, since it skips the
+/// UTF-8 validation a `&str` would require.
+///
+/// # Errors
+///
+/// As [`parse`], plus a [`ParseError::Json`] when the bytes are not valid UTF-8.
+pub fn parse_slice(json: &[u8]) -> Result<Message, ParseError> {
+    match serde_json::from_slice(json) {
+        Ok(message) => Ok(message),
+        Err(e) => Err(match serde_json::from_slice::<Value>(json) {
+            Ok(value) => classify(e, peek_tag(&value)),
+            Err(_) => ParseError::Json(e),
+        }),
+    }
+}
+
+/// Parse a JSON Lines stream, the shape Maxwell's file and stdout producers write.
+///
+/// Yields one result per non-blank line, so a single bad line does not end the stream and
+/// the caller decides whether to skip it. Blank lines are ignored, and line numbers count
+/// every line including those.
+///
+/// ```
+/// let stream = concat!(
+///     r#"{"type":"insert","database":"d","table":"t","data":{"id":1}}"#,
+///     "\n",
+///     r#"{"type":"delete","database":"d","table":"t","data":{"id":1}}"#,
+/// );
+///
+/// let messages: Result<Vec<_>, _> = maxwell_cdc::parse_lines(stream).collect();
+/// assert_eq!(messages.unwrap().len(), 2);
+/// ```
+pub fn parse_lines(json: &str) -> impl Iterator<Item = Result<Message, LineError>> + '_ {
+    json.lines()
+        .enumerate()
+        .filter(|(_, line)| !line.trim().is_empty())
+        .map(|(index, line)| {
+            parse(line).map_err(|source| LineError {
+                line: index + 1,
+                source,
+            })
+        })
 }
 
 /// The operation type for row change messages.
@@ -33,8 +143,12 @@ pub enum OpType {
 }
 
 /// A Maxwell CDC message parsed from JSON.
+///
+/// Non-exhaustive: Maxwell has added message types before, and a caller matching on this
+/// enum must carry a catch-all arm so a new one is not a breaking change here.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "kebab-case")]
+#[non_exhaustive]
 pub enum Message {
     /// Row insertion into a table.
     Insert(RowChange),
@@ -141,10 +255,10 @@ pub struct RowChange {
     ///
     /// A MySQL `DECIMAL` wider than `f64` loses digits here, because [`Value`] holds
     /// fractional numbers as `f64`. Column order is not preserved either.
-    pub data: BTreeMap<String, Value>,
+    pub data: Map<String, Value>,
     /// Previous row data (for updates only).
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub old: Option<BTreeMap<String, Value>>,
+    pub old: Option<Map<String, Value>>,
 }
 
 /// A control message (bootstrap start/complete).
@@ -165,7 +279,7 @@ pub struct ControlMessage {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
     /// Event data (typically empty for control messages).
-    pub data: BTreeMap<String, Value>,
+    pub data: Map<String, Value>,
     /// Primary key values.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub primary_key: Option<Vec<Value>>,
