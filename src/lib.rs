@@ -263,6 +263,11 @@ pub struct RowChange {
     /// Previous row data (for updates only).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub old: Option<Map<String, Value>>,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// A control message (bootstrap start/complete).
@@ -290,6 +295,11 @@ pub struct ControlMessage {
     /// Primary key column names.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub primary_key_columns: Option<Vec<String>>,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// Metadata common to DDL messages.
@@ -372,6 +382,11 @@ pub struct TableCreateChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// A table alteration message.
@@ -390,6 +405,11 @@ pub struct TableAlterChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// A table drop message.
@@ -402,6 +422,11 @@ pub struct TableDropChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// A database creation or alteration message.
@@ -413,6 +438,11 @@ pub struct DatabaseChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }
 
 /// A database drop message.
@@ -423,4 +453,9 @@ pub struct DatabaseDropChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
+    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
+    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
+    /// added after this crate's last release.
+    #[serde(flatten)]
+    pub extra: Map<String, Value>,
 }

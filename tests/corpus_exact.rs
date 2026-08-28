@@ -34,6 +34,67 @@ fn messages_deduplicate_through_a_hash_set() {
     assert_eq!(seen.len(), fixtures.len());
 }
 
+/// The catch-all must stay empty for messages this crate fully models.
+///
+/// If it ever fills up for a fixture, either Maxwell added a field worth modelling or the
+/// catch-all is swallowing one this crate already has, including the `type` tag itself.
+#[test]
+fn nothing_in_the_corpus_lands_in_the_catch_all() {
+    for (name, raw) in support::all() {
+        let message = parse(&raw).expect("parse message");
+
+        let extra = match &message {
+            Message::Insert(row)
+            | Message::Update(row)
+            | Message::Delete(row)
+            | Message::BootstrapInsert(row) => &row.extra,
+            Message::BootstrapStart(control) | Message::BootstrapComplete(control) => {
+                &control.extra
+            }
+            Message::TableCreate(change) => &change.extra,
+            Message::TableAlter(change) => &change.extra,
+            Message::TableDrop(change) => &change.extra,
+            Message::DatabaseCreate(change) | Message::DatabaseAlter(change) => &change.extra,
+            Message::DatabaseDrop(change) => &change.extra,
+            _ => unreachable!("{name}: unhandled variant"),
+        };
+
+        assert!(
+            extra.is_empty(),
+            "{name}: unmodelled fields landed in the catch-all: {extra:?}"
+        );
+    }
+}
+
+/// A field this crate does not know must survive parsing and reserialization.
+#[test]
+fn unmodelled_fields_survive_a_roundtrip() {
+    let json = concat!(
+        r#"{"type":"insert","database":"d","table":"t","data":{"id":1},"#,
+        r#""injected_by_a_script":"keep me","future_field":42}"#
+    );
+
+    let message = parse(json).expect("unknown fields must not block parsing");
+
+    let Message::Insert(row) = &message else {
+        panic!("expected insert");
+    };
+    assert_eq!(
+        row.extra.get("injected_by_a_script"),
+        Some(&json!("keep me"))
+    );
+    assert_eq!(row.extra.get("future_field"), Some(&json!(42)));
+
+    let reserialized: Value = serde_json::from_str(&serde_json::to_string(&message).unwrap())
+        .expect("reserialized must be valid json");
+    let original: Value = serde_json::from_str(json).expect("original must be valid json");
+
+    assert_eq!(
+        reserialized, original,
+        "an unmodelled field must not be dropped"
+    );
+}
+
 /// Reserializing a parsed message must reproduce every field Maxwell emitted.
 ///
 /// The fixtures are the raw lines Maxwell wrote, so a field this crate does not model shows
