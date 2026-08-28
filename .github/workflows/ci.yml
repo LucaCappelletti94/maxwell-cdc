@@ -18,7 +18,7 @@ jobs:
     name: Fuzz Smoke Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@nightly
       - run: cargo install cargo-fuzz --version 0.13.2 --locked
       - run: cargo fuzz run parse --release -- -max_len=10000 -runs=1000
