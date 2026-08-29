@@ -3,6 +3,10 @@ name: CI
 on:
   push:
   pull_request:
+  schedule:
+    # Weekly on Monday at 06:00 UTC: surfaces new advisories and toolchain regressions
+    # without burning minutes on every push.
+    - cron: "0 6 * * 1"
 
 permissions:
   contents: read
@@ -14,11 +18,82 @@ jobs:
   checks:
     uses: ./.github/workflows/checks.yml
 
-  fuzz:
-    name: Fuzz Smoke Test
+  audit:
+    name: Security Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@nightly
-      - run: cargo install cargo-fuzz --version 0.13.2 --locked
-      - run: cargo fuzz run parse --release -- -max_len=10000 -runs=1000
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-audit@0.22.1
+      - name: Run security audit
+        run: cargo audit
+
+  semver-checks:
+    name: Semver Checks
+    runs-on: ubuntu-latest
+    # The crate is not yet published to crates.io, so cargo-semver-checks cannot find a
+    # baseline and errors out. continue-on-error makes the job non-blocking until the
+    # first release lands; after that it compares against the crates.io baseline normally.
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Install cargo-semver-checks
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-semver-checks
+      - name: Check semver compatibility
+        run: cargo semver-checks
+
+  fuzz-smoke:
+    name: Fuzz Smoke Test
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz --version 0.13.2 --locked
+      # The seed corpus is committed under fuzz/seeds; fuzz/corpus is generated and
+      # gitignored, so it is empty here and serves as the writable directory.
+      - name: Run fuzz smoke test (parse)
+        run: >-
+          cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
+          -- -max_len=10000 -runs=1000 -dict=fuzz/parse.dict
+      - name: Run fuzz smoke test (parse_lines)
+        run: >-
+          cargo fuzz run parse_lines --release fuzz/corpus/parse_lines fuzz/seeds/parse_lines
+          -- -max_len=10000 -runs=1000 -dict=fuzz/parse.dict
+
+  fuzz-long:
+    name: Fuzz (Scheduled)
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz --version 0.13.2 --locked
+      - name: Run extended fuzz session (parse)
+        run: >-
+          cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
+          -- -max_len=10000 -max_total_time=300 -dict=fuzz/parse.dict
+      - name: Run extended fuzz session (parse_lines)
+        run: >-
+          cargo fuzz run parse_lines --release fuzz/corpus/parse_lines fuzz/seeds/parse_lines
+          -- -max_len=10000 -max_total_time=300 -dict=fuzz/parse.dict

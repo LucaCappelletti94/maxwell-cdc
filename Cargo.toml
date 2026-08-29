@@ -11,6 +11,9 @@ readme = "README.md"
 keywords = ["maxwell", "mysql", "cdc", "json", "no-std"]
 categories = ["database", "encoding", "no-std"]
 
+[package.metadata.docs.rs]
+all-features = true
+
 [dependencies]
 serde = { version = "1", default-features = false, features = ["alloc", "derive"] }
 serde_json = { version = "1", default-features = false, features = ["alloc"] }
@@ -45,3 +48,4 @@ invalid_rust_codeblocks = "forbid"
 [lints.clippy]
 all = { level = "deny", priority = -1 }
 pedantic = { level = "deny", priority = -1 }
+cargo = { level = "deny", priority = -1 }

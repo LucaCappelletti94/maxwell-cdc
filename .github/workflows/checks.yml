@@ -15,38 +15,61 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
-      - run: cargo test --release --all-features --locked
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install MySQL client library
+        run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Run tests
+        run: cargo test --release --all-features --locked
 
   fmt:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable with rustfmt
+        uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
-      - run: cargo fmt --all -- --check
+      - name: Check formatting
+        run: cargo fmt --all -- --check
 
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable with clippy
+        uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
-      - run: cargo clippy --all-targets --all-features --locked -- -D warnings
+      - name: Install MySQL client library
+        run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features --locked -- -D warnings
 
   docs:
     name: Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
-      - run: cargo test --release --doc --locked
-      - run: cargo doc --no-deps --all-features --locked
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Run doctests
+        run: cargo test --release --doc --locked
+      - name: Build documentation
+        run: cargo doc --no-deps --all-features --locked
         env:
           RUSTDOCFLAGS: -D warnings
 
@@ -54,18 +77,39 @@ jobs:
     name: Rust 1.85
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.85
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust 1.85
+        uses: dtolnay/rust-toolchain@1.85
       # rust-version is a contract for consumers of the library, so only the library is
       # checked. The dev-dependencies (criterion, testcontainers) need a newer toolchain.
-      - run: cargo check --lib --locked
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Check library (MSRV)
+        run: cargo check --lib --locked
 
   no-std:
     name: No std
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.85
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust 1.85 with no_std target
+        uses: dtolnay/rust-toolchain@1.85
         with:
           targets: thumbv7em-none-eabihf
-      - run: cargo check --lib --target thumbv7em-none-eabihf --locked
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@v2
+      - name: Check library (no_std)
+        run: cargo check --lib --target thumbv7em-none-eabihf --locked
+
+  lockfile:
+    name: Lockfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Verify Cargo.lock satisfies Cargo.toml
+        run: cargo metadata --locked --format-version=1 > /dev/null
