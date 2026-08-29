@@ -19,8 +19,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - name: Install Rust stable with llvm-tools-preview
-        uses: dtolnay/rust-toolchain@stable
+      # Nightly because --branch is an unstable llvm-cov option.
+      - name: Install Rust nightly with llvm-tools-preview
+        uses: dtolnay/rust-toolchain@nightly
         with:
           components: llvm-tools-preview
       - name: Install cargo-llvm-cov
