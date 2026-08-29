@@ -1,10 +1,5 @@
 #![no_std]
 #![doc = include_str!("../README.md")]
-//!
-//! Every payload struct derives [`Default`] so a caller can name the fields it cares about
-//! and finish with `..Default::default()`, which also keeps a later field addition from
-//! breaking construction. A defaulted value is a starting point for building one, not a
-//! valid Maxwell message: the required fields come back empty.
 
 extern crate alloc;
 
