@@ -16,7 +16,7 @@ all-features = true
 
 [dependencies]
 serde = { version = "1", default-features = false, features = ["alloc", "derive"] }
-serde_json = { version = "1", default-features = false, features = ["alloc"] }
+serde_json = { version = "1", default-features = false, features = ["alloc", "float_roundtrip"] }
 thiserror = { version = "2", default-features = false }
 
 [dev-dependencies]
