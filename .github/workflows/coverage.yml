@@ -30,8 +30,12 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev
       - name: Cache cargo registry and build
         uses: Swatinem/rust-cache@v2
+      # The floor sits below the current 95% only far enough to absorb noise. The lines that
+      # stay uncovered are panic arms inside unit tests, which fire only when a test fails.
       - name: Generate coverage report
-        run: cargo llvm-cov --all-features --locked --branch --tests --lcov --output-path lcov.info
+        run: >-
+          cargo llvm-cov --all-features --locked --branch --tests
+          --fail-under-lines 90 --lcov --output-path lcov.info
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7
         with:

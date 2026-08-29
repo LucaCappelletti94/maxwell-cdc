@@ -2,7 +2,7 @@
 
 mod support;
 
-use maxwell_cdc::{Message, OpType, ParseError, parse};
+use maxwell_cdc::{Message, OpType, ParseError, parse, parse_slice};
 use serde_json::{Value, json};
 
 /// The operation type a message with this `type` tag must report.
@@ -32,6 +32,34 @@ fn messages_deduplicate_through_a_hash_set() {
     }
 
     assert_eq!(seen.len(), fixtures.len());
+}
+
+/// `tag` must return the tag Maxwell actually wrote.
+///
+/// This also pins every arm of the exhaustive match, so a mistyped tag is caught against
+/// real wire data rather than against a second hand-written list.
+#[test]
+fn every_fixture_reports_the_tag_maxwell_wrote() {
+    for (name, raw) in support::all() {
+        let original: Value = serde_json::from_str(&raw).expect("parse fixture");
+        let expected = original["type"].as_str().expect("type tag");
+
+        let message = parse(&raw).expect("parse message");
+
+        assert_eq!(message.tag(), expected, "{name}: wrong tag");
+    }
+}
+
+/// `parse_slice` must accept the same bytes as `parse` and agree with it.
+#[test]
+fn parse_slice_agrees_with_parse_on_every_fixture() {
+    for (name, raw) in support::all() {
+        let from_str = parse(&raw).unwrap_or_else(|e| panic!("parse {name}: {e}"));
+        let from_bytes =
+            parse_slice(raw.as_bytes()).unwrap_or_else(|e| panic!("parse_slice {name}: {e}"));
+
+        assert_eq!(from_str, from_bytes, "{name}: entry points disagree");
+    }
 }
 
 /// The catch-all must stay empty for messages this crate fully models.
