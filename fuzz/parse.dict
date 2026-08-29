@@ -1,0 +1,83 @@
+# Maxwell CDC JSON fuzzing dictionary.
+# Covers every known type tag, every field name the model knows, and
+# JSON structural tokens. Keep entries to the most useful domain tokens;
+# the fuzzer's own mutation provides generic byte variation.
+
+# --- type tag values ---
+"insert"
+"update"
+"delete"
+"bootstrap-insert"
+"bootstrap-start"
+"bootstrap-complete"
+"table-create"
+"table-alter"
+"table-drop"
+"database-create"
+"database-alter"
+"database-drop"
+
+# --- top-level field names ---
+"type"
+"database"
+"table"
+"data"
+"old"
+"ts"
+"xid"
+"xoffset"
+"commit"
+"position"
+"gtid"
+"server_id"
+"thread_id"
+"schema_id"
+"push_ts"
+"comment"
+"query"
+"primary_key"
+"primary_key_columns"
+"def"
+"sql"
+"charset"
+"columns"
+
+# --- nested field names (ColumnDefinition / TableDefinition) ---
+"primary-key"
+"enum-values"
+"column-length"
+"signed"
+"name"
+
+# --- JSON structural tokens ---
+"{"
+"}"
+"["
+"]"
+":"
+","
+"null"
+"true"
+"false"
+
+# --- common SQL column types seen in Maxwell DDL messages ---
+"bigint"
+"int"
+"varchar"
+"datetime"
+"enum"
+"set"
+"text"
+"tinyint"
+"float"
+"double"
+"decimal"
+"blob"
+"json"
+"timestamp"
+
+# --- known OpType values (kebab-case as serialized) ---
+"insert"
+"update"
+"delete"
+"bootstrap-insert"

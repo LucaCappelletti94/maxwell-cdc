@@ -1,0 +1,1 @@
+{"type": "insert", "database": "testdb_\u4e2d\u6587", "table": "t\u00e9bl\u00e9", "ts": 1700000000, "data": {"emoji_col": "\ud83d\udcbe\ud83d\ude80", "cjk_col": "\u6570\u636e\u5e93", "escaped": "line1\nline2\ttab\"quote\\backslash"}}

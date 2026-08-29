@@ -1,0 +1,1 @@
+{"type": "update", "database": "db", "table": "t", "ts": 1700000000, "data": {"id": 1, "name": "new"}, "old": {"name": "old_value"}}

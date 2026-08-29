@@ -1,3 +1,11 @@
+# Fuzz targets for maxwell-cdc.
+#
+# Invocation (libFuzzer takes corpus directories in order, first is the writable one):
+#   cargo +nightly fuzz run parse fuzz/corpus/parse fuzz/seeds/parse -- -dict=fuzz/parse.dict
+#   cargo +nightly fuzz run parse_lines fuzz/corpus/parse_lines fuzz/seeds/parse_lines -- -dict=fuzz/parse.dict
+#
+# fuzz/seeds/ is committed; fuzz/corpus/ is generated locally and gitignored.
+
 [package]
 name = "maxwell-cdc-fuzz"
 version = "0.0.0"
@@ -18,3 +26,8 @@ path = "fuzz_targets/parse.rs"
 test = false
 doc = false
 
+[[bin]]
+name = "parse_lines"
+path = "fuzz_targets/parse_lines.rs"
+test = false
+doc = false

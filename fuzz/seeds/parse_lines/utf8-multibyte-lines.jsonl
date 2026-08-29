@@ -1,0 +1,2 @@
+{"type": "insert", "database": "testdb_\u4e2d\u6587", "table": "t\u00e9", "data": {"col": "\ud83d\udcbe"}}
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
