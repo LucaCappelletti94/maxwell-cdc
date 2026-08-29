@@ -1,5 +1,10 @@
 #![no_std]
 #![doc = include_str!("../README.md")]
+//!
+//! Every payload struct derives [`Default`] so a caller can name the fields it cares about
+//! and finish with `..Default::default()`, which also keeps a later field addition from
+//! breaking construction. A defaulted value is a starting point for building one, not a
+//! valid Maxwell message: the required fields come back empty.
 
 extern crate alloc;
 
@@ -228,7 +233,7 @@ impl Message {
 }
 
 /// A row change message (insert, update, delete, or bootstrap insert).
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct RowChange {
     /// Database name.
     pub database: String,
@@ -297,7 +302,7 @@ pub struct RowChange {
 }
 
 /// A control message (bootstrap start/complete).
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ControlMessage {
     /// Database name.
     pub database: String,
@@ -332,7 +337,7 @@ pub struct ControlMessage {
 }
 
 /// Metadata common to DDL messages.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DdlMetadata {
     /// Event timestamp in milliseconds since epoch.
     pub ts: i64,
@@ -350,7 +355,7 @@ pub struct DdlMetadata {
 }
 
 /// A column definition in a table.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ColumnDefinition {
     /// Column name.
     pub name: String,
@@ -373,7 +378,7 @@ pub struct ColumnDefinition {
 }
 
 /// A table definition in a database.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableDefinition {
     /// Database name.
     pub database: String,
@@ -390,7 +395,7 @@ pub struct TableDefinition {
 }
 
 /// A database definition.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseDefinition {
     /// Database name.
     pub database: String,
@@ -400,7 +405,7 @@ pub struct DatabaseDefinition {
 }
 
 /// A table creation message.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableCreateChange {
     /// Database name.
     pub database: String,
@@ -423,7 +428,7 @@ pub struct TableCreateChange {
 }
 
 /// A table alteration message.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableAlterChange {
     /// Database name.
     pub database: String,
@@ -449,7 +454,7 @@ pub struct TableAlterChange {
 }
 
 /// A table drop message.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TableDropChange {
     /// Database name.
     pub database: String,
@@ -469,7 +474,7 @@ pub struct TableDropChange {
 }
 
 /// A database creation or alteration message.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseChange {
     /// Database definition.
     #[serde(flatten)]
@@ -488,7 +493,7 @@ pub struct DatabaseChange {
 }
 
 /// A database drop message.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct DatabaseDropChange {
     /// Database name.
     pub database: String,
