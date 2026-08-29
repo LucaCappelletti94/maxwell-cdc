@@ -34,22 +34,36 @@ jobs:
   semver-checks:
     name: Semver Checks
     runs-on: ubuntu-latest
-    # The crate is not yet published to crates.io, so cargo-semver-checks cannot find a
-    # baseline and errors out. continue-on-error makes the job non-blocking until the
-    # first release lands; after that it compares against the crates.io baseline normally.
-    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      # cargo-semver-checks compares against the released version, so it cannot run before
+      # the first publish. Probing the registry means the job becomes a real gate the moment
+      # the crate exists, with no workflow edit and no permanently red check meanwhile.
+      - name: Look for a published baseline
+        id: baseline
+        run: |
+          if curl -sSf -o /dev/null -A "maxwell-cdc-ci" \
+              "https://crates.io/api/v1/crates/maxwell-cdc"; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "maxwell-cdc is not on crates.io yet, so there is no baseline." \
+              >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Install Rust stable
+        if: steps.baseline.outputs.exists == 'true'
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo registry and build
+        if: steps.baseline.outputs.exists == 'true'
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-semver-checks
+        if: steps.baseline.outputs.exists == 'true'
         uses: taiki-e/install-action@v2
         with:
           tool: cargo-semver-checks
       - name: Check semver compatibility
+        if: steps.baseline.outputs.exists == 'true'
         run: cargo semver-checks
 
   fuzz-smoke:
@@ -65,8 +79,11 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-fuzz
         run: cargo install cargo-fuzz --version 0.13.2 --locked
-      # The seed corpus is committed under fuzz/seeds; fuzz/corpus is generated and
-      # gitignored, so it is empty here and serves as the writable directory.
+      # fuzz/corpus is generated and gitignored, so it is absent on a fresh checkout and
+      # libFuzzer refuses to start. Create it as the writable directory, with the committed
+      # fuzz/seeds supplying the inputs.
+      - name: Create the writable corpus directories
+        run: mkdir -p fuzz/corpus/parse fuzz/corpus/parse_lines
       - name: Run fuzz smoke test (parse)
         run: >-
           cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
@@ -89,6 +106,8 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-fuzz
         run: cargo install cargo-fuzz --version 0.13.2 --locked
+      - name: Create the writable corpus directories
+        run: mkdir -p fuzz/corpus/parse fuzz/corpus/parse_lines
       - name: Run extended fuzz session (parse)
         run: >-
           cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
