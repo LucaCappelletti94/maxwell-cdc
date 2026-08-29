@@ -36,12 +36,9 @@ fn messages_deduplicate_through_a_hash_set() {
 
 /// The catch-all must stay empty for messages this crate fully models.
 ///
-/// This is the real guard against a field being dropped from a struct: the reserialization
-/// test cannot see that, because the catch-all puts the field back. If this fills up, either
-/// Maxwell added a field worth modelling or the catch-all is swallowing one the crate
-/// already has, including the `type` tag itself.
-///
-/// Its blind spot is a variant with no fixture, which it never reaches.
+/// The real guard against a dropped field, which the reserialization test cannot see. If it
+/// fills up, either Maxwell added a field worth modelling or the catch-all is swallowing one
+/// the crate already has. Blind to a variant with no fixture.
 #[test]
 fn nothing_in_the_corpus_lands_in_the_catch_all() {
     for (name, raw) in support::all() {
@@ -72,10 +69,9 @@ fn nothing_in_the_corpus_lands_in_the_catch_all() {
 
 /// Every tag in the corpus must be recognised by the error classifier.
 ///
-/// A tag the library models but forgot to list internally still parses when the payload is
-/// valid, so nothing else notices. It only shows up on a broken payload of that type, which
-/// gets blamed on an unrecognised message type instead of on the payload. Stripping each
-/// fixture down to its tag is the cheapest way to reach that path.
+/// A modelled tag missing from the internal list still parses when the payload is valid, so
+/// only a broken payload reveals it, misblamed on the message type. Stripping each fixture
+/// to its tag is the cheapest way to reach that path.
 #[test]
 fn a_broken_payload_is_never_blamed_on_its_message_type() {
     for (name, raw) in support::all() {
@@ -125,14 +121,10 @@ fn unmodelled_fields_survive_a_roundtrip() {
 
 /// Reserializing a parsed message must reproduce every field Maxwell emitted.
 ///
-/// What this proves on its own is narrow. The `extra` catch-all absorbs any field the crate
-/// does not model and flattens it back out, so a field dropped from a struct still passes
-/// here. It catches a field this crate invents, a value it mangles, and a field it fails to
-/// re-emit at all.
-///
-/// Dropped fields are caught by `nothing_in_the_corpus_lands_in_the_catch_all` instead. The
-/// two together are what prove every field Maxwell emits is modelled, so deleting either
-/// one guts the guarantee.
+/// Narrow on its own: the `extra` catch-all puts a dropped field back, so this cannot see
+/// one. It catches an invented field and a mangled value.
+/// `nothing_in_the_corpus_lands_in_the_catch_all` catches the dropped ones, so the pair is
+/// what proves the model complete.
 #[test]
 fn every_fixture_reserializes_to_the_bytes_maxwell_emitted() {
     for (name, raw) in support::all() {

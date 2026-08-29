@@ -6,13 +6,13 @@
 [![Codecov](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc/branch/main/graph/badge.svg)](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/LucaCappelletti94/maxwell-cdc/blob/main/LICENSE)
 
-`maxwell-cdc` turns the JSON that [Maxwell's Daemon](https://maxwells-daemon.io/) writes into typed Rust
-messages. It reads bytes you already have, so it never connects to MySQL and never reads a binlog. The
-crate is `no_std` and needs only an allocator.
+`maxwell-cdc` turns the JSON that [Maxwell's Daemon](https://maxwells-daemon.io/) writes into typed
+Rust messages. It parses bytes you already have, so it never touches MySQL. `no_std`, needs an
+allocator.
 
-Maxwell tails a MySQL binlog and emits one JSON object per change. There are twelve kinds: four that
-carry a row, two that bracket a bootstrap snapshot, and six that describe a schema change. Each kind
-becomes its own variant, so a field is optional here only when Maxwell itself may omit it.
+Maxwell emits one JSON object per change, in twelve kinds: four carry a row, two bracket a bootstrap
+snapshot, six describe a schema change. Each kind is its own variant, so a field is optional here
+only when Maxwell may omit it.
 
 ```rust
 use maxwell_cdc::{Message, OpType, parse};
@@ -90,8 +90,8 @@ assert!(matches!(broken, Err(ParseError::Json(_))));
 ## Nothing is silently dropped
 
 Maxwell has many output flags, and its scripting hooks can inject arbitrary keys. Any field the model
-does not name is kept verbatim in `extra` and written back out, so a message survives a round trip
-even when this crate is older than the Maxwell that produced it.
+does not name is kept verbatim in `extra`, so a message survives a round trip even when this crate is
+older than the Maxwell that produced it.
 
 ```rust
 use maxwell_cdc::{Message, parse};
@@ -145,6 +145,6 @@ order Maxwell emitted. Enable `serde_json`'s `preserve_order` feature in your ow
 will again. Match with a catch-all arm. Every payload struct derives `Eq` and `Hash`, so messages can
 be deduplicated through a set.
 
-Row timestamps (`ts`) are in seconds. Schema-change timestamps are in milliseconds. That is Maxwell's
-choice, not this crate's. A MySQL `DECIMAL` wider than an `f64` loses digits, because `serde_json`
-holds fractional numbers as `f64`.
+Row timestamps (`ts`) are in seconds, schema-change timestamps in milliseconds. That is Maxwell's
+choice. A MySQL `DECIMAL` wider than an `f64` loses digits, because `serde_json` holds fractional
+numbers as `f64`.

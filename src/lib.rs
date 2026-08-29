@@ -9,11 +9,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Map, Number, Value};
 use thiserror::Error;
 
-/// Every `type` tag Maxwell emits, in [`Message`] variant order.
-///
-/// Used only to tell an unrecognised message type apart from malformed input, which
-/// `serde_json` reports as the same error category. Kept in step with the enum by
-/// [`Message::tag`] and the `message_tags_match_the_variants` test below.
+/// Every `type` tag Maxwell emits. Used only to tell an unrecognised type apart from
+/// malformed input, which `serde_json` reports as the same error category.
 const MESSAGE_TAGS: [&str; 12] = [
     "insert",
     "update",
@@ -83,14 +80,12 @@ pub fn parse(json: &str) -> Result<Message, ParseError> {
     }
 }
 
-/// Parse a Maxwell CDC JSON message from bytes.
-///
-/// Prefer this over [`parse`] when the input is already a byte buffer, since it skips the
-/// UTF-8 validation a `&str` would require.
+/// Parse a Maxwell CDC JSON message from bytes, skipping the UTF-8 validation a `&str`
+/// would need.
 ///
 /// # Errors
 ///
-/// As [`parse`], plus a [`ParseError::Json`] when the bytes are not valid UTF-8.
+/// As [`parse`], plus [`ParseError::Json`] when the bytes are not valid UTF-8.
 pub fn parse_slice(json: &[u8]) -> Result<Message, ParseError> {
     match serde_json::from_slice(json) {
         Ok(message) => Ok(message),
@@ -182,10 +177,8 @@ pub enum Message {
 }
 
 impl Message {
-    /// The operation type if this is a row change, else `None`.
-    ///
-    /// Matched exhaustively on purpose: a new row-carrying variant must fail to compile
-    /// here rather than silently report no operation.
+    /// The operation type if this is a row change, else `None`. Exhaustive, so a new
+    /// row-carrying variant fails to compile here instead of silently reporting nothing.
     #[must_use]
     pub fn op_type(&self) -> Option<OpType> {
         match self {
@@ -204,10 +197,8 @@ impl Message {
         }
     }
 
-    /// The `type` tag Maxwell writes for this variant.
-    ///
-    /// Matched exhaustively so a new variant cannot be added without deciding its tag, which
-    /// is what keeps the crate's internal tag list from drifting away from the enum.
+    /// The `type` tag Maxwell writes for this variant. Exhaustive, so a new variant cannot
+    /// be added without deciding its tag.
     #[must_use]
     pub fn tag(&self) -> &'static str {
         match self {
@@ -286,12 +277,8 @@ pub struct RowChange {
     /// Previous row data (for updates only).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub old: Option<Map<String, Value>>,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -321,12 +308,8 @@ pub struct ControlMessage {
     /// Primary key column names.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub primary_key_columns: Option<Vec<String>>,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -412,12 +395,8 @@ pub struct TableCreateChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -438,12 +417,8 @@ pub struct TableAlterChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -458,12 +433,8 @@ pub struct TableDropChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -477,12 +448,8 @@ pub struct DatabaseChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }
@@ -495,12 +462,8 @@ pub struct DatabaseDropChange {
     /// DDL metadata.
     #[serde(flatten)]
     pub metadata: DdlMetadata,
-    /// Any field Maxwell emitted that this crate does not model, kept verbatim so nothing
-    /// is lost on the way through. Populated by Maxwell scripting hooks and by fields
-    /// added after this crate's last release.
-    ///
-    /// Keys here must not collide with the named fields above. Serializing a colliding key
-    /// writes the JSON object twice over, and the result no longer parses.
+    /// Fields Maxwell emitted that this crate does not model, kept verbatim. Keys must not
+    /// collide with the named fields above, or serializing writes them twice.
     #[serde(flatten)]
     pub extra: Map<String, Value>,
 }

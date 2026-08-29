@@ -1,8 +1,5 @@
-//! Allocation ceiling for parsing a row message.
-//!
-//! The point is to catch a change that makes the parser allocate per field or per byte, not
-//! to pin an exact figure. An exact count would fail on any `serde_json` retuning, so this
-//! asserts a ceiling with headroom and reports the observed figure on breach.
+//! Allocation ceiling for parsing a row message. A ceiling rather than an exact count,
+//! which would fail on any `serde_json` retuning.
 
 mod support;
 
@@ -15,9 +12,8 @@ static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
 /// Parsing `row-insert` must stay within a small, fixed number of allocations.
 ///
-/// The observed count is 20. The ceiling sits just above it rather than at a round number,
-/// because `RowChange` has 15 named fields and a bug allocating once per field would land
-/// near 35, which a looser bound would wave through.
+/// Observed is 20. The ceiling sits close because `RowChange` has 15 named fields, so a
+/// per-field allocation bug would land near 35 and a looser bound would miss it.
 #[test]
 fn row_insert_parsing_stays_within_its_allocation_ceiling() {
     const CEILING: usize = 24;

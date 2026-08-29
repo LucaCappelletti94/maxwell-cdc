@@ -1,8 +1,5 @@
-//! Fixture discovery shared by the integration tests and the benches.
-//!
-//! Fixtures are read at run time from `tests/fixtures`, so the directory is the single
-//! source of truth for which message types the corpus covers. Adding a file is enough to
-//! pull it into every test and bench that iterates the corpus.
+//! Fixture discovery shared by the tests and the benches. Read at run time, so the
+//! directory is the only list of what the corpus covers.
 
 #![allow(dead_code)]
 
@@ -13,10 +10,8 @@ pub fn dir() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures")
 }
 
-/// Every fixture as a `(name, raw bytes)` pair, sorted by name.
-///
-/// The bytes are exactly what Maxwell wrote, so a comparison against them is a comparison
-/// against the wire format rather than against this crate's own output.
+/// Every fixture as a `(name, raw bytes)` pair, sorted by name. The bytes are what Maxwell
+/// wrote, so comparing against them compares against the wire format.
 pub fn all() -> Vec<(String, String)> {
     let mut fixtures: Vec<(String, String)> = std::fs::read_dir(dir())
         .unwrap_or_else(|e| panic!("read {}: {e}", dir().display()))
