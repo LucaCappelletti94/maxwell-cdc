@@ -180,40 +180,40 @@ impl Message {
     /// The operation type if this is a row change, else `None`. Exhaustive, so a new
     /// row-carrying variant fails to compile here instead of silently reporting nothing.
     #[must_use]
-    pub fn op_type(&self) -> Option<OpType> {
+    pub const fn op_type(&self) -> Option<OpType> {
         match self {
-            Message::Insert(_) => Some(OpType::Insert),
-            Message::Update(_) => Some(OpType::Update),
-            Message::Delete(_) => Some(OpType::Delete),
-            Message::BootstrapInsert(_) => Some(OpType::BootstrapInsert),
-            Message::BootstrapStart(_)
-            | Message::BootstrapComplete(_)
-            | Message::TableCreate(_)
-            | Message::TableAlter(_)
-            | Message::TableDrop(_)
-            | Message::DatabaseCreate(_)
-            | Message::DatabaseAlter(_)
-            | Message::DatabaseDrop(_) => None,
+            Self::Insert(_) => Some(OpType::Insert),
+            Self::Update(_) => Some(OpType::Update),
+            Self::Delete(_) => Some(OpType::Delete),
+            Self::BootstrapInsert(_) => Some(OpType::BootstrapInsert),
+            Self::BootstrapStart(_)
+            | Self::BootstrapComplete(_)
+            | Self::TableCreate(_)
+            | Self::TableAlter(_)
+            | Self::TableDrop(_)
+            | Self::DatabaseCreate(_)
+            | Self::DatabaseAlter(_)
+            | Self::DatabaseDrop(_) => None,
         }
     }
 
     /// The `type` tag Maxwell writes for this variant. Exhaustive, so a new variant cannot
     /// be added without deciding its tag.
     #[must_use]
-    pub fn tag(&self) -> &'static str {
+    pub const fn tag(&self) -> &'static str {
         match self {
-            Message::Insert(_) => "insert",
-            Message::Update(_) => "update",
-            Message::Delete(_) => "delete",
-            Message::BootstrapInsert(_) => "bootstrap-insert",
-            Message::BootstrapStart(_) => "bootstrap-start",
-            Message::BootstrapComplete(_) => "bootstrap-complete",
-            Message::TableCreate(_) => "table-create",
-            Message::TableAlter(_) => "table-alter",
-            Message::TableDrop(_) => "table-drop",
-            Message::DatabaseCreate(_) => "database-create",
-            Message::DatabaseAlter(_) => "database-alter",
-            Message::DatabaseDrop(_) => "database-drop",
+            Self::Insert(_) => "insert",
+            Self::Update(_) => "update",
+            Self::Delete(_) => "delete",
+            Self::BootstrapInsert(_) => "bootstrap-insert",
+            Self::BootstrapStart(_) => "bootstrap-start",
+            Self::BootstrapComplete(_) => "bootstrap-complete",
+            Self::TableCreate(_) => "table-create",
+            Self::TableAlter(_) => "table-alter",
+            Self::TableDrop(_) => "table-drop",
+            Self::DatabaseCreate(_) => "database-create",
+            Self::DatabaseAlter(_) => "database-alter",
+            Self::DatabaseDrop(_) => "database-drop",
         }
     }
 }

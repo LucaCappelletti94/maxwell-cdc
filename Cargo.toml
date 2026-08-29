@@ -34,6 +34,15 @@ harness = false
 [lints.rust]
 missing_docs = "forbid"
 unsafe_code = "forbid"
+missing_debug_implementations = "deny"
+missing_copy_implementations = "deny"
+unreachable_pub = "deny"
+unused_qualifications = "deny"
+elided_lifetimes_in_paths = "deny"
+trivial_casts = "deny"
+trivial_numeric_casts = "deny"
+unused_import_braces = "deny"
+variant_size_differences = "deny"
 
 [lints.rustdoc]
 broken_intra_doc_links = "forbid"
@@ -49,3 +58,4 @@ invalid_rust_codeblocks = "forbid"
 all = { level = "deny", priority = -1 }
 pedantic = { level = "deny", priority = -1 }
 cargo = { level = "deny", priority = -1 }
+nursery = { level = "deny", priority = -1 }

@@ -18,6 +18,9 @@ use testcontainers::ImageExt;
 use testcontainers::core::{IntoContainerPort, Mount, WaitFor};
 use testcontainers::runners::SyncRunner;
 
+// `unreachable_pub` rejects `pub` on the nested module and `redundant_pub_crate` rejects
+// `pub(crate)`. The compiler lint wins.
+#[allow(clippy::redundant_pub_crate)]
 mod tables {
     diesel::table! {
         capture_events (id) {
@@ -29,7 +32,7 @@ mod tables {
         }
     }
 
-    pub mod maxwell {
+    pub(crate) mod maxwell {
         diesel::table! {
             maxwell.bootstrap (id) {
                 id -> BigInt,
@@ -87,10 +90,11 @@ fn wait_for_bootstrap(path: &Path) {
             if let Ok(content) = fs::read_to_string(path) {
                 for line in content.lines() {
                     if let Ok(val) = serde_json::from_str::<serde_json::Value>(line) {
-                        if let (Some("bootstrap-complete"), Some("capture_events")) = (
+                        if (
                             val.get("type").and_then(|v| v.as_str()),
                             val.get("table").and_then(|v| v.as_str()),
-                        ) {
+                        ) == (Some("bootstrap-complete"), Some("capture_events"))
+                        {
                             return;
                         }
                     }
