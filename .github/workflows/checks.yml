@@ -80,7 +80,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Rust 1.85
-        uses: dtolnay/rust-toolchain@1.85
+        uses: dtolnay/rust-toolchain@1.120
       # rust-version is a contract for consumers of the library, so only the library is
       # checked. The dev-dependencies (criterion, testcontainers) need a newer toolchain.
       - name: Cache cargo registry and build
@@ -95,7 +95,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Rust 1.85 with no_std target
-        uses: dtolnay/rust-toolchain@1.85
+        uses: dtolnay/rust-toolchain@1.120
         with:
           targets: thumbv7em-none-eabihf
       - name: Cache cargo registry and build
