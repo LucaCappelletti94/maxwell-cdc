@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       # Nightly because --branch is an unstable llvm-cov option.
       - name: Install Rust nightly with llvm-tools-preview
         uses: dtolnay/rust-toolchain@nightly
@@ -29,7 +29,7 @@ jobs:
       - name: Install MySQL client library
         run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev
       - name: Cache cargo registry and build
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
       # The floor sits below the current 95% only far enough to absorb noise. The lines that
       # stay uncovered are panic arms inside unit tests, which fire only when a test fails.
       - name: Generate coverage report
@@ -37,7 +37,7 @@ jobs:
           cargo llvm-cov --all-features --locked --branch --tests
           --fail-under-lines 90 --lcov --output-path lcov.info
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v7
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7
         with:
           files: lcov.info
           fail_ci_if_error: false
