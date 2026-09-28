@@ -1,0 +1,1 @@
+{"type": "bootstrap-insert", "database": "db", "table": "t", "ts": 1700000000, "comment": "my-task-label", "primary_key": [42], "primary_key_columns": ["id"], "data": {"id": 42, "val": "hello"}}

@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_evets","def":{"database":"testdb","charset":"utf8mb4","table":"capnts","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullable_text","charset":"utf8mb4"},{"type":"datetim82a9:26","schema_id":5}

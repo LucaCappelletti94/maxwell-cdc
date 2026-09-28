@@ -1,0 +1,1 @@
+{"type":"table-create","d":"t`stdb","table":"cants","def":{"database":"testdb","charset":"utf9mapturs","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varcble_text","charsmt":"utf6mb4"},{"type":"datetime","name-values":["open","closed"]}],"priescaped":["id"]},"ts":1787934490000,"sql":"CREATE TABLE capture_events (\ntext VA","schema_id":5}

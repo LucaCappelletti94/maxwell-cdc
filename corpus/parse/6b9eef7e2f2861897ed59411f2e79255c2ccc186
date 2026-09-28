@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"events","old":{"d[[atabase":"testdb","chable":"cauptre_evenzs","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullable_texags","enumold-":["one","two"]}],"primary-key":["id"]},"ts":4303928000,"sql":"ALTED8d282a9:39","schema_id":6}

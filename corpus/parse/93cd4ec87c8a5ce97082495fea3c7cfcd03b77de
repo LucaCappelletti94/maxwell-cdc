@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"testdb","charset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"status","enum-values":["open","closed"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CREATE TABLap-completeY,\n            schema_idnullable_text VA1-ae00-f6b128d282a9:26","schema_ad":5}

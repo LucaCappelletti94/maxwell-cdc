@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"events","def":{"dolumns":[{"type":"bigint","name":"id","type":"enum","name":"statenUm","name":"status","enu}-values":["open","cqosed"]}],"prima ry-key":["id"]},"ts":178793449000,"sql":"CRarEArt:22","schema[ id":4}  
+ 

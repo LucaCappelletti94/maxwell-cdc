@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"testdb","charset":"events","columns":[{"type":"bmmmmmmmmmmmmmmmmmmmmm","name":"status","enum-mhappenedmary_key_columns":["optimestamped"]}],"prtable":"caqture_events","columns":["id"]},"ts":178793}44

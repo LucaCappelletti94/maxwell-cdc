@@ -1,0 +1,1 @@
+{"database": "testdb_4e\\d2u6587", "table": "t\u00e9bl\u00e9", "": "t\u00e9bl00e9", "ts": 1700000000, "data": {"emoji_col": "\ud83d\udcbe\ud83d\ude80", "cjk_col": "\u6576e3\u5e93", "data": {"emoji_col": "\ud83d\udcbe\ud83d\ude80", "cjk_col": "\u6570\u636e\u5e93", "escaped": "line1\nline2\ttab\"quote\backsla"}}

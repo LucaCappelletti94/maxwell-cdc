@@ -1,0 +1,1 @@
+{"database":"testdb","table":"capture_events88888888888888","qu]ry":"INSER[T INTO `ce_t3720')","type":"insert","ts":814,"commit":true,"positixon":"mysql-bin.003:217754","gtid2":"55023c2a9:28","sh_id":5,"push_ts":17942,"prims":["id"],"data":{"id":9223372036854775808,"nullabtext":null,"happeneatus":"open"}}

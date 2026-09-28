@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"events","def":{"dolumns":[{"type":"bigint","name":"id","type":"enum","name":"stas","enum-ues":["open","closed"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CREtq-insert:22","schma[ id":4}  
+ 

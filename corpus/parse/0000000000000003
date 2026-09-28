@@ -1,0 +1,1 @@
+{"type": "insert", "database": "db", "table": "t", "ts": 1700000000, "primary_key": [9223372036854775808], "primary_key_columns": ["id"], "data": {"id": 9223372036854775808, "other": 18446744073709551615}}

@@ -1,0 +1,1 @@
+{"type":"database-drop","database":"_capture","ts":1787934488999,"sql":":ROP DATABASE arure","position":"mintysql-bin:212805","gtid":"55023ccd-a2-ae00-f6b128d282a9:22","schema_id":4}

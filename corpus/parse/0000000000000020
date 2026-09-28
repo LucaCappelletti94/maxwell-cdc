@@ -1,0 +1,1 @@
+{"type": "delete", "database": "db", "table": "t", "ts": -1, "xid": -9223372036854775808, "data": {"delta": -9999999999999999, "temp": -273.15}}

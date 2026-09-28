@@ -1,0 +1,1 @@
+{"type":"table-alter","table":"apctnts","old":{"database":"tes","charset":"utf4","tse":"testdb","charset":"utcven","columnprimary-key":["id"]},"ts":100,"sql":"ALTEE 00-2a9:39","schedi":6}

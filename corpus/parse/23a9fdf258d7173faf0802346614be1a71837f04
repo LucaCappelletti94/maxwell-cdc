@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdbs","old":{"database":"testdb","charset":"u_events","columns":[{"type":"biint","name":"id","signed":"int"}],"prmary-key":["id"]},"ts":1780,"sql":"ALTER TA17","gtid":"55","sc?id":6}

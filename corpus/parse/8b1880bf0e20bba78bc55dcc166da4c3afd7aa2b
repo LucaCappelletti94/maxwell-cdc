@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"ents","def":{"databchalns":[{"type":"bigint","name":"id","sigtid":false},{"alues":["open","closed"]}],"prim#ry-key":["id"]},"ts":1787934489999,"sql":"CREBLE ca2","schemd":4}  
+ 

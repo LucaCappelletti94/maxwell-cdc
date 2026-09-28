@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"testdbre_events","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varb4"},{"type":"datetimevents","columns":[{"ty,pe":"bigint","namd":fals           ema_id":5}

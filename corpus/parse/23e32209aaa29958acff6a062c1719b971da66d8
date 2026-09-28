@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"evefalsents","def":{"dolumns":[{"typ-name":"stble_t","charset":"utf3bootstrap-completemb4"},{"yidtype%ned":null},{"t":6},{"timval_kexxxxxxxxxxxxxned":null},{"type":"enf1mb4"},{"type":"datetime","name":"happened_at","coluamealues":["open","closed"]}],"pe":"nert","\rimary-key":["id"]},"ts":1790000,"sql":"CREinsert:4","schema[ id":4}  
+ 

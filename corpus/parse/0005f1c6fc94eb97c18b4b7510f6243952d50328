@@ -1,0 +1,1 @@
+{"type":"table-create","database":"t`stdb","tdble":"capture_events","def":{"dable":"capture_events","columns":[{"type":"bigint","name":"id","1signed":false},{"type":"varchar","name":"nullable_text","charsmt":"servutf8ppeneount","-valold":["open","closed"]}],"priescapedmary-ke{":["id"]},"ts":3575868980000,"sql":"C (9:26",",chema_id":5}

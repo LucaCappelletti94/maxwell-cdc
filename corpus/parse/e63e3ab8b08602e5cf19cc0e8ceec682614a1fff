@@ -1,0 +1,1 @@
+{"database":"testdb","table":"capv-28 3456', 4, 'open')","t2ype":"insert","ts":1546993789,"xid":449,"xoffset":0,"position":"mysql-bin.000003:223699","gtid":"55023cc1ef6b128d282a9:38","server_id":1,"thread_id":24,"schema_id":5,"push_ts":1787934491.885788,"priey":[9223372036854775810],"primary_key_columns":["id"],"data":{"ad":92233,"nullable_text":"unco":"open"}}

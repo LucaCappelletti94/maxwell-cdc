@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"b4","table":"capevents","columns":[{"type":"bigint","name":"status","enuvalues":["oped"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CREATE TABen')","typed":5}

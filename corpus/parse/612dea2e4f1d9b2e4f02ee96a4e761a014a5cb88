@@ -1,0 +1,1 @@
+{"database":"testdb","table":"capture_)","type":"insert","ts":1787934490,"xid":407,"h_id":5,"push_&s":1787934490.781942,"pdou-ble_key":[9223372036854],"pbimary_key_columns":["id"],"data":{"id":922337775808,"nullxt":null,"happened_at":"2026-08-202.123456","amount":1,"status":"open"}}

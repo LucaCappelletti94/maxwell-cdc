@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"archive_c","def":{"ddataatae":"2capture_events","columns":[{"type":"bigint","umn-length":6},{"type":"int","nameg~ed":true},{"es":["open","closed"]}],"ey":["id"]},"ts":1787934490,"sql":"CREATert:22","":4}  
+ 
