@@ -1,0 +1,10 @@
+{"tpe":"insert","dabase":"db","table":"t","data":{"id":1}}
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+{"type":"delete","database":"d,"data":{"i}}

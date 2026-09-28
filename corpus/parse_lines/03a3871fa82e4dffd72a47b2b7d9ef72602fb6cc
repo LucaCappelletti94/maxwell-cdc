@@ -1,0 +1,9 @@
+{"type":"insert","database":"db","table":"t","data":{"i.d":1}}
+   
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+	
+{"type":"update","database":"db","table":"*::"db","table":"t","data":{"id":1}}
+   
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+	
+{"type":"update","database":"db","table":"*","data":{"id":1},"old":{"id"","data":{"id"ld":{"id":0}}

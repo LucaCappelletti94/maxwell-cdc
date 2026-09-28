@@ -1,0 +1,3 @@
+comm									1}}
+{"type":"delete","databble":"t","data":{"id":"db","table:1}}
+{"type":"delete","database":"typedb","table":"t","data":{"a

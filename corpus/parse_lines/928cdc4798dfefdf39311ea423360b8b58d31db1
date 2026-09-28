@@ -1,0 +1,7 @@
+{"type":"insert","database":"db","table":"t","data":{"id":1}}
+   
+{"type":"delete","database":"db","table":"t","data":{"id":1}}
+	
+{"typ+e":"update","`atabase":"db","table":"*:"dumns:1}}
+	
+{"type":"update","database":"db","table":"*","data":{"id":1},"o9999999999999999900old":{"id":0}}
