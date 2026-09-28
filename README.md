@@ -4,7 +4,6 @@
 [![Documentation](https://docs.rs/maxwell-cdc/badge.svg)](https://docs.rs/maxwell-cdc)
 [![CI](https://github.com/LucaCappelletti94/maxwell-cdc/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaCappelletti94/maxwell-cdc/actions/workflows/ci.yml)
 [![Codecov](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc/branch/main/graph/badge.svg)](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc)
-[![Codacy](https://app.codacy.com/project/badge/Grade/2a5f2b3f3c16471cb26d7c3194078ecd)](https://app.codacy.com/gh/LucaCappelletti94/maxwell-cdc/dashboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/LucaCappelletti94/maxwell-cdc/blob/main/LICENSE)
 
 `maxwell-cdc` turns the JSON that [Maxwell's Daemon](https://maxwells-daemon.io/) writes into typed

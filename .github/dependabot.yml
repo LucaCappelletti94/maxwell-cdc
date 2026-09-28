@@ -12,3 +12,16 @@ updates:
       # The reference selects the Rust toolchain rather than the action version,
       # so Dependabot reads 1.85.0 as a release and offers a nonexistent 1.120.0.
       - dependency-name: dtolnay/rust-toolchain
+  - package-ecosystem: cargo
+    directories:
+      - /
+      - /fuzz
+    schedule:
+      interval: weekly
+    # Advisories mostly land in transitive crates, which version updates skip by default.
+    allow:
+      - dependency-type: all
+    groups:
+      cargo:
+        patterns:
+          - "*"
