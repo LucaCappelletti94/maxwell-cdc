@@ -1,0 +1,48 @@
+name: Fixtures
+
+# Regenerates the fixtures from live MySQL and Maxwell containers, then runs the suite on them.
+# Nothing else runs testcontainers or diesel, so this runs whenever the lockfile moves.
+on:
+  push:
+    branches: [main]
+    paths:
+      - Cargo.lock
+      - tests/fixtures_regeneration.rs
+      - .github/workflows/fixtures.yml
+  pull_request:
+    paths:
+      - Cargo.lock
+      - tests/fixtures_regeneration.rs
+      - .github/workflows/fixtures.yml
+  schedule:
+    - cron: "30 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  regenerate:
+    name: Regenerate Fixtures
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install MySQL client library
+        run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev
+      - name: Cache cargo registry and build
+        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+      - name: Regenerate the fixtures
+        run: cargo test --release --all-features --locked --test fixtures_regeneration -- --ignored
+      - name: Run the suite on the regenerated fixtures
+        run: cargo test --release --all-features --locked
