@@ -217,7 +217,7 @@ fn setup_containers(
     let mysql_url = format!("mysql://root:subql_test@127.0.0.1:{mysql_port}/testdb");
 
     let host_flag = format!("--host={mysql_name}");
-    let maxwell = GenericImage::new("zendesk/maxwell", "v1.44.0")
+    let maxwell = GenericImage::new("zendesk/maxwell", "v1.46.0")
         .with_wait_for(WaitFor::message_on_stderr("Binlog connected"))
         .with_network(&network)
         .with_mount(Mount::bind_mount(&output_path, "/output"))
