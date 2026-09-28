@@ -35,3 +35,6 @@ jobs:
           fuzz-seconds: 600
           mode: code-change
           sanitizer: ${{ matrix.sanitizer }}
+          # Starts from the batch corpus. Reading needs no token, so fork PRs work too.
+          storage-repo: https://github.com/${{ github.repository }}.git
+          storage-repo-branch: clusterfuzzlite
