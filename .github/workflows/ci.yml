@@ -70,53 +70,18 @@ jobs:
         if: steps.baseline.outputs.exists == 'true'
         run: cargo semver-checks
 
-  fuzz-smoke:
-    name: Fuzz Smoke Test
-    if: github.event_name != 'schedule'
+  # ClusterFuzzLite does the fuzzing. The fuzz crate is its own workspace, so no other job compiles it.
+  fuzz-check:
+    name: Fuzz Targets Compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Install Rust nightly
-        uses: dtolnay/rust-toolchain@nightly
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo registry and build
         uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
-      - name: Install cargo-fuzz
-        run: cargo install cargo-fuzz --version 0.13.2 --locked
-      # fuzz/corpus is generated and gitignored, so it is absent on a fresh checkout and
-      # libFuzzer refuses to start. Create it as the writable directory, with the committed
-      # fuzz/seeds supplying the inputs.
-      - name: Create the writable corpus directories
-        run: mkdir -p fuzz/corpus/parse fuzz/corpus/parse_lines
-      - name: Run fuzz smoke test (parse)
-        run: >-
-          cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
-          -- -max_len=10000 -runs=1000 -dict=fuzz/parse.dict
-      - name: Run fuzz smoke test (parse_lines)
-        run: >-
-          cargo fuzz run parse_lines --release fuzz/corpus/parse_lines fuzz/seeds/parse_lines
-          -- -max_len=10000 -runs=1000 -dict=fuzz/parse.dict
-
-  fuzz-long:
-    name: Fuzz (Scheduled)
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Install Rust nightly
-        uses: dtolnay/rust-toolchain@nightly
-      - name: Cache cargo registry and build
-        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
-      - name: Install cargo-fuzz
-        run: cargo install cargo-fuzz --version 0.13.2 --locked
-      - name: Create the writable corpus directories
-        run: mkdir -p fuzz/corpus/parse fuzz/corpus/parse_lines
-      - name: Run extended fuzz session (parse)
-        run: >-
-          cargo fuzz run parse --release fuzz/corpus/parse fuzz/seeds/parse
-          -- -max_len=10000 -max_total_time=300 -dict=fuzz/parse.dict
-      - name: Run extended fuzz session (parse_lines)
-        run: >-
-          cargo fuzz run parse_lines --release fuzz/corpus/parse_lines fuzz/seeds/parse_lines
-          -- -max_len=10000 -max_total_time=300 -dict=fuzz/parse.dict
+        with:
+          workspaces: fuzz
+      - name: Check fuzz targets
+        run: cargo check --manifest-path fuzz/Cargo.toml --all-targets --locked
