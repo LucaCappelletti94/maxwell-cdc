@@ -1,0 +1,4 @@
+# rust-version binds the library, whose dependencies the Rust 1.85 CI job checks. Holding the
+# whole lockfile to 1.85 would also pin the dev-dependencies, which only ever build on stable.
+[resolver]
+incompatible-rust-versions = "allow"
