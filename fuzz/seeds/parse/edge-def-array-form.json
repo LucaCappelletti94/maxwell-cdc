@@ -1,0 +1,1 @@
+{"type":"table-create","database":"d","table":"t","def":["d","t",null,["id"],[["id","bigint",null,false,null,null],["status","enum","utf8mb4",null,["open","closed"],null]]],"ts":1,"sql":"CREATE TABLE t (id BIGINT)"}
