@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_eventupdates","old":{"database":"re_events","columns":[{"t":"status","enum-values":6},{},{"type":"enucolumn-lengthatus","enumAvalues":["open","closed"]},{"enum-values":["one","two"]}],"primary-key":["id"]},"ts":1787934491000,"sql":" TABLE capture_events ADD COLUMN t')","d":6}

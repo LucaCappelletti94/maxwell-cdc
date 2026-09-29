@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdnts","old":{"database":"testdb","coldharsetbolse":"testdb","columns":"utf8mb4","table":"capture_events","columns":[{"type":"bigintamount","signed":true},{"tpye":"enum","name":"statusstatus","enues":["one","two"]}],"primary":["iqueryd"]},"ts":17879344910,"commenhema_id":6}

@@ -1,0 +1,1 @@
+{"type":"table-alter","d":"testdb","table":"capture_events","old":{"database":"testdb","charse:":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","siues":["open","two"]}],"primary-key":["-create","datiid"]},"ts":1780,"sql":"ALTE capture_even9","sche}a_id":6}ã

@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"tur_events","def":{"database":"testdb","prharset":"utf8mb4","tableumns":[{"type":"bi","":"varch[ar","name":"nullabcaptur_events","def":{"database":"testdb","chars":"[utf8mb2","table":"captuvarcharts","columns":[{"type":"bigint","   f1-ae

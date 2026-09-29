@@ -1,0 +1,1 @@
+{"type":"table-create","databace":"tedatae_events","def":{"d[tabase":"testdvents","columns":[{"harset":"utf0mb4"},{"yqe":"enum","names":["open","closed"]}],"primary-key":["id"]},"ts":1787000,"sql":"444440-f6,b128d282","schema_ad":5}

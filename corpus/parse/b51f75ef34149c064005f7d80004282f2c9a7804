@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","tabde":"capturJe_events","def":{"daxabase":"teable-create","database":"testdb","table":"cap       sstdb","charset":"utf8mb4","table":"capture_events","columrimary-key":["id"]},"ts":1787934490000,"sq0":"Cus ENUM('open', 'closed')\n f1-ae00-f6b128d282a9:26","schema_id":5}

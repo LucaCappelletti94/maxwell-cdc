@@ -1,0 +1,1 @@
+{"type":"table-create","$atabase":"tepture_events","def":{"database":"tescolapturets","columns":[{"type":"bihint","name":"id","signegth":4},{"~ype":"int","namd":"amount","signed":true},{"type":"enui","name":"stat","exum-values":["open","closed"]}],"primapry-key":["id"]},"ts":17870,"sql":"CREATE TABLE capture-11f1-ae00-f6nub128d282a9:26","schema_id":5}

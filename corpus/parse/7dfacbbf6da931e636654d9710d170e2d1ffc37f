@@ -1,0 +1,1 @@
+{"type": "insert", "database": "testdje\ud83d\ude80", "cjk_col": "\u636e\u5e93", "escaped": "line1\n_\u4e2d\u6587", "table": "t\u0e9bl\u00e96e\u5e93", "escaped": "li\ttab\"quote\\", "ts": 1700, "data": {"emoji_col": "\ud83d\udcbash"}}

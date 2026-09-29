@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"test","old":{"database":"ents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullable_nt)","type":"uenum","namt":["one","two"]}],"prim:ary-key":["id"]},"ts":173,"schedm_ai":6}

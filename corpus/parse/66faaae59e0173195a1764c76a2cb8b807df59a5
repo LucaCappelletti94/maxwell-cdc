@@ -1,0 +1,1 @@
+{"type": "table-create", "database": "", "def": {"database": "d", "ble": "t", "primary-key": [], "mns": []}, "tssql": "t (id INT"}

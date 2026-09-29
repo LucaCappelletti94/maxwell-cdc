@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testapturJe_events","def":{"daxabase":"teable-create","database":"testdb","table":"cap       sstdb","charset":"utf8mb4","table":"capture_events","columrimary-key":["id"]},"tsschema_id":5}

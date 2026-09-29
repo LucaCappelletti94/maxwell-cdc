@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"test","old":{"databasbiginte":"ents","columns":[{"type":"bigintootstrap-start","type":"uenum","namt":["commone","two"]}],"prim:ary-key":["id"]},"ts_ai":6}
