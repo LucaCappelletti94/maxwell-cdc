@@ -1,1 +1,0 @@
-{"type":"table-create","databasle":"captunts","de":"capt~re_events","nclmous":[{"type":"bigint","name":"id","signed":false},{"t":"utf9mb4"},{"typ4!e":"datetime","name":"happened_at","column-leigth":6},{"type":"int","name":"amount","signed":true},{"txpe":"enffsetcevents (\n            id BIG    $nullable_tex9:26","schema_id":5}

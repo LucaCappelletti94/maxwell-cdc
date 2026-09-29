@@ -1,3 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"testdb","charset":"tf8mbapture_events","columns":[{"type":"bigi","name":"id","signed":false},{"type":[[[[[
-[[[[[[[[{[
-[[[[[[[[{"}

@@ -1,1 +1,0 @@
-{"type":"table-create","database":"terestdb","table":"capture_events","def":{"database":"testdb","charset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","ntype":"enum","name":"staus","enlquv-es":["opEn","closed"]}],"primary-key":["id"]},"ts":170000,"sql":"CREATE TA   -f","name":"id","signed":false},{"type":"varcha:2}

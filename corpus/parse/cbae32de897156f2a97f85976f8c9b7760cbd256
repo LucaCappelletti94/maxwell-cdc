@@ -1,1 +1,0 @@
-{"type":"database-create","database":"archive_capture","charset":"utf8mb4","ts":1787934489000,"sql":"CREATE ture","position":"mysql-bin.0000406","gtid":"55023ccad2-fd-11f:19","schema_id":2}

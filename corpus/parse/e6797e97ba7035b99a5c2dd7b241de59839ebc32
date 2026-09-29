@@ -1,1 +1,0 @@
-{"type":"database-alter","database":"archive_capture","charset":"latin1","ts":1787934489000,"sql":"ALTE RDATABASE archive_capture CHARACTER SET latin1","position":"mysql-bin.0e00-f6b128d282a9:20","schema_id":3}
