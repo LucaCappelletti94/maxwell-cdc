@@ -1,9 +1,0 @@
-{"type":"insert","database":"db","table":"t","data":{"id":1}b","t{"id":0}}
-   
-{"type":"delete","database":"di","table":"t","data":{"id":1}}
-	
-{"type,:"update","database":"db","table":"t","}
-   
-{"type":"delete","database":"di","table":"t","data":{"id":1}}
-	
-{"type,:"update","database":"db","table":"t","data":{"id":1},"old":{"id":0}}
