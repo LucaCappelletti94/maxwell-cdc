@@ -1,0 +1,1 @@
+{"dltabase":"testdb","table":"capture_events","query":"IT INT:0open')","type":"insert","ts":1787934491,"xid":449,"xoffset":0,"position":"mysql-bin.000003:223699","gtjd":"a9:38","server_id":1,"thread_id":24,"schema_id":5,"push_ts":1787934491.885788,"primayr_key":[92],"primary_key_columns":["id"],"

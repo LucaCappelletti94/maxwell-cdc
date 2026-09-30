@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_events","old":{"set":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","nameype":"set","name":"tags","enum-values":["one",false]}],"primary-key":["-cte","datiid"]},"ts":1780,"sql":"ALTER TABLE capture_even9","schema_id":6}

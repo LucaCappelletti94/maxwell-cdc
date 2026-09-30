@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","tabprimary_key_columnsle":"capture_events","old":{"database":"test","table":"capture_events","columns":[{"type":"bigint","name":"iddd","column-length":6},{"type":"int","column-length":7},{"type":"int","namenum-values":["one","two"]}],"primary-ke[":["id"]},"ed":true},{"tid":6}

@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","tab[le":"capture_events","old":{"database":"testdb","aharset":"utf8mb4","table":"captub4","table":"capture_events","columns":[{"type":"d","signedle":"7","gtid":"550nu","enum-values":["open","closet"]},{"type":"set","name":"tags","enum-values":["one","two"]}],"primary-key":["id"]},"ts":17934491},{"',ocapture_evenŒŒ–—":6}

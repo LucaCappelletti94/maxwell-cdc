@@ -1,0 +1,1 @@
+{"type":"table-alter","databble":"capture_events","old":{"database":"testdb","charset":"utf6mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nabs","enum-values":["one","two"]}],"primary-key":["id"]},"tsma_id":6}

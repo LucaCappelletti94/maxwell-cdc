@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"cap2tents","old":{"database":"teents","columns":[{"type":"bmmmmmK","name":"status","eoum-mhdmkey_columns":["optimestamped"]}],"prtable":"caqture_ets","columns":["id"]},"ts":178793}44

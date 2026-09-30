@@ -1,0 +1,1 @@
+{"database":"testdb","table":"ce_events","query":"UP5807)","type":"update","ts":1787934490,"xid":410,"commit":true,"position":"my8227","gtid":"55023ccae00-f6b128d282a9:29","server_id":1,"thread_id":24,"schema_id":5,"push_tmns":["&id"],"data":{"id":9775808,"nullable":1}}

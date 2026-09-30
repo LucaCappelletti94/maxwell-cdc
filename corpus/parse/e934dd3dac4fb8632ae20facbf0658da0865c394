@@ -1,0 +1,1 @@
+{"database":"testdb","table":"capture_events","query":"UPture_events`Se5477580)","type":"update","ts":1787934490,"xid":410,"commit":true,"nosition":"mysql-bin.000003:29","server_id":1,"thread_idr_id":1,"thread_id":24,"sc":24,"schema_id":5,"pushts":1787934495.8854,"primary_key":[9223372036854775808],"priolumns":["id"],"data":{"id":9},"old":{"nullable_nt":1}}
