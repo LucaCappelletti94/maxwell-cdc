@@ -1,1 +1,0 @@
-{"type":"table-alter","dataBase":"testdbs","old":{"database":"testdb","columns":[{"type":"biint","name":"id","signed":"int"}],"prmary-key":["id"]},"tssc?id":6}

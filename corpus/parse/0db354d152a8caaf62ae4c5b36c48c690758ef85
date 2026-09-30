@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"e;efalsents","def":{"dolumns":[{"type":"bigitn","kexxxxxxxxxxxxxned":null},{"type":"enum","name":"s","name":"status","enum-valuesprimkexxxxxxxxxxxxxned":null},{"type":"enum","namme":"happened_at","columhaxxxxxxxxxxxumhappened_atn-length":7},{"type":"int","igned":null},{"type":"enum","name":"stble_tuxtatus","\f\f-values":["open","closed"]}],"pe":"nert","\rimary-key":["id"]},"ts":1790000,"sql":"CREinsert:4","schema[ id":2}  
- 

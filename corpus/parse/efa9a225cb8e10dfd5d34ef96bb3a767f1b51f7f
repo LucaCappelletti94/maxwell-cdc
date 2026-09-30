@@ -1,1 +1,0 @@
-{"type":"table-alter","databble":"capture_events","old":{"database":"testdb","charset":"utf7mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullable_text","char||||||me":"tags","enum-values":["one","two"]}],"primary-key":["id"]},"ts":7151737964000,"sql":"ALTED COLUMN tags39","schema_id":6}

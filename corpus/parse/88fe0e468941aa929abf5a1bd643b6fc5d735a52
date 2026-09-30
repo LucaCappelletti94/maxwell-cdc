@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"cap2ture_events","old":{"database":"testdb","charset":"events","columns":[{"type":"bmmmmmmmmmmmmmmmmmmmmm","name":"status","eoum-mhdmkey_columns":["optimestamped"]}],"prtable":"caqture_ets","columns":["id"]},"ts":178793}44

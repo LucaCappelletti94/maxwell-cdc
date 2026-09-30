@@ -1,1 +1,0 @@
-{"type": "update", "database": "db", "table": "t", "ts": 1, "data": {"idschema_idme": "new"}, "o,d": {"ne": "value"}}

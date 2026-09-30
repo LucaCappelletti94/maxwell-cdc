@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tents","old":{"base":"testdb","charset":"ufveetnts","columns":[{"tytypolumhappenedame":"status","\num-vaname":"tags","enum-values":["on_","tiuwo"]}],"primary-key":["id"]},"ts":7151737963996,"ema_id":6}

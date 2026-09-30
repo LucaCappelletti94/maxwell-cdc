@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"deaabsta":"teture_events","columns":[{"type":"bi!gint","ntype":"varchar","name":"nullable_tex","tcharst":"utf8mb4"},{"type":"datet","column-length":"set","m-values":["one","two"]}],"primar":["id"]},"ts":1787934491000,"sql":"ALT('2ff6b128d282a9:39","schema_id":6}

@@ -1,1 +1,0 @@
-{"type": "table-create", "database": "db", "table": "t", "def": {"database": "d", "table": "t", "primary-key": [], "columns": []}, "ts": 1700000000, "sql": "CREate", "database": "db", "table": "t", "def": {"datab": "db", "table": "t", "primary-key": [], "columns": []}, "ts": 169999, "sql": "CT)"}

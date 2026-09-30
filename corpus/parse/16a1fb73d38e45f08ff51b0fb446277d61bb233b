@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"testdb","charset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullext","m-values":["sed"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"C6b26","schema_ad":5}

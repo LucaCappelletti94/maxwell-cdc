@@ -1,1 +1,0 @@
-{"type":"database-drop","database":"archive_pnullcrqtae","ts":17800,"sql":"utf8mb4","tans":[{"type":"bint","name":"id","signxx":["one","two"]}],"primary-k":["id"]},'}

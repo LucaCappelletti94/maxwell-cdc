@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tents","old":{"base":"testdb","charset":"ufveetnts","columns":[{"tytypolumhappen":"status","\num-vaname":"tags","enum-values":["on_","tiuwo"]}],"primary-key":["id"]},"ts":71}

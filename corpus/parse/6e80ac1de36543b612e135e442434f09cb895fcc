@@ -1,1 +1,0 @@
-{"type": "insert", "database": "testdb_\u4e87", "table": "t\u00e9ble9", "ts": 1000000, "data": {"jk_col": "\u65706e\u5e93", "escaped": "nine2\ttab\"quote\\backslash"}}

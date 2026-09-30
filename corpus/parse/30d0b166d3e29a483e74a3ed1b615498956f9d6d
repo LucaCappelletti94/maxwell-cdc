@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"cants","def":{"database":"tes_events","clumns":[{"type":"bigint","name":"id","signed":false},{"type":"varatetimevents","columns":[{"ty,pe":"bigint","namd":fals           ema_id":0}

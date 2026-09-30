@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capttre_events","old":{"database":"ents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullable_nt)","type":"uenum","namt":["one","two"]}],"prim:ary-key":["id"]},"ts":1787934491000,"sql":"ALTER TABLd-11f1-ad282a9:39","schedm_ai":6}

@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"testdb","primary-keycharset":"utf8mb4","tableumns":[{"type":"bigint","":"varch[ar","name":"nullabcaptur_events","def":{"database":"testdb","charset":"utf8mb2","table":"capture_events","columns":[{"type":"bigint","":"varchar","name":"nullable_text       f1-ae

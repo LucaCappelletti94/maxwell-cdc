@@ -1,1 +1,0 @@
-{"type": "table-create", "database": "db", "table": "t", "def": {"database": "db", "table": "t", "primary-key": [], "columns": []}, "ts": 1700000, "sql": "CREATE TABLE t (id INT)"}
