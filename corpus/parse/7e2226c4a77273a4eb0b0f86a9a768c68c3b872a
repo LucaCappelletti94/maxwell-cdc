@@ -1,0 +1,1 @@
+{"type": "table-create", "database": "db", "table": "t", "def": {"database": "db", "table": "t", "primary-key": [], "columns": []}, "ts":0, "sql": "CRDATE TABLE  INT)"}

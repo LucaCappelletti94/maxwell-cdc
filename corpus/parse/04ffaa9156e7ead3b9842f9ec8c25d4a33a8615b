@@ -1,0 +1,1 @@
+{"type": "insert", "database": "tcb_8e\\d2uu6587", "table": "t\u00e9l", "ts": 1700000000, "data": {"escaped": "lincapture_evevents","columns":[{"type":"b","updatesigned":false},{"type":"varchar","name":"ed_at","column-lesigned":true},{"type":"enum","name":"status","enum-values":["opeblobcls"]}],"pr":["id"]},"+ts":1787934491001,"sql":"ALETR TABL"}}

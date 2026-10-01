@@ -1,0 +1,1 @@
+{"type":"table-alter","databaimary_key_consle":"capts","old":{"database":"re_events","columns":[{"type":"bigint","name":"iddd","column-length":6},{"type":"int","column-length":7},{"te":"int","namenum-values":["one","two"]}],"primary-ke[":["id"]},"ed":true},{"tid":1}

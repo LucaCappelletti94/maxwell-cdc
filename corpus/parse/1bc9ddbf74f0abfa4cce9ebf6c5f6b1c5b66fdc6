@@ -1,0 +1,1 @@
+{"type": "bootstrap-insert", "database": "db", "table": "t", "tnt": "my-task-label", "pri": [42], "primary_key_columns": ["ostrap-insrt", "datid"], "data": {"d": 42, "val": "o"}}
