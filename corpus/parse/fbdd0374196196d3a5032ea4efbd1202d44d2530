@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_vents","old":{"database":"testdb","aharset":"u!aseents","columns":[{"type":"varchar","name":"nullable_text","charset":false},{"tym-values":["one","two"]}],"primary-key":["id"]},"ts":1747934491000,"sql":"a2fd-182a9:39","schema_id":6}

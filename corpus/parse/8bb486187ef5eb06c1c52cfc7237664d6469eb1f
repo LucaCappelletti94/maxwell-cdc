@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"da[tabase":"testdb","ce":"captura_events","columns":[{"type":null},{"length":6},{"type":"mnt","s":["one","two"]}],"primary-key":["id"]},"ts":"468","_d":2}@:1787934491000,"sql":"ALTERCOLUMN ta=s SET('one','two9:39",{"database":"blÿ

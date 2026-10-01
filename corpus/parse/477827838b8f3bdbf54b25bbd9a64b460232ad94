@@ -1,1 +1,0 @@
-{"type":"table-create","database":"tevents","def":{"database":"testdb","charset":"utf4mb4","wable":"capture_events","co/umns":[{"type":"bygint","name":"amount","m-values":["open","closed"]}],"primary-key":[9900]},"ts":1787934490000,"tabsql":"CRE   statussign\ntuo","enum-values":["open","losed"]}]@imary-keÿÿgned Eo0-f6b1289ema_id":5}

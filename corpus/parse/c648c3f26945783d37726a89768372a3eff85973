@@ -1,1 +1,0 @@
-{"type":"table-create","def":{"databaseab~e":"captur_events","columns":[{"thtype":"bigint","name":"status","enum-values":["open","closed"]}],"primary-key":["id"]},"floataesctad":5}Š
