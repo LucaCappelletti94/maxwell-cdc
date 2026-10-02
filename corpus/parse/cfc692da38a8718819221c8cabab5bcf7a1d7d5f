@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"da![tabasearset":"utre_events","columns":[{"type":"biamount","signed":null},{"type":"enum","name":"stb","enum-values":["one","two"]}],"primary-key":["id"]},"xxxxxxxxxed":false},{"tvarchar}

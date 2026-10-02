@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"evefalsents","def":{"dolumns":[{"type":"bigitn","name":"int","name":"amount","s!gned":true},{"type":"enucharsm","name":"status","en":"amount","signed":true},{"type":"enum","name":"status","entype":"datypeme","name":"happened_at","column-ype":"int","name":"amount","signed":true},{"type":"enum","namexe":"um","name":"status","\f\f-values":["open","closed"]}],"pe":"nert","\rimary-key":["id"]},"ts":1790001,"sql":"CREinsert:2","schema[ id":4}  
- 

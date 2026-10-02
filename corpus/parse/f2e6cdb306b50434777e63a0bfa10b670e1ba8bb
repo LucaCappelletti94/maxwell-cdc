@@ -1,1 +1,0 @@
-{"type":"table-create","database":"tre_events","def":{"database":"testdb","charset":"utf8mb4","table":"capturts","ns":[{"type":"bigint","na":["open","closed"]}],"primary-key":["it"]},"ts":5}

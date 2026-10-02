@@ -1,1 +1,0 @@
-{"type":"database-drop","database":"archive_capture","tsptu1-11ble":"saevents","def":{"database":"testdb","charset":"utf9mb4","table":"capture_events","columns":[{"type":"bigi","name":"idchar","name":"nullablcolumnse_text","charset":"ime","name":"h","name":"status","enum-lues":["open","closed"]}],"primary!Yey":["id"]},"ts":1787934490000,"sql":"CREAT rrt:22","schema[ id":4}LE  

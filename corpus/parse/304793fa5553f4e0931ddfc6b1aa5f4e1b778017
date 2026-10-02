@@ -1,1 +1,0 @@
-{"type": "insert", "database": "db", "table": "t", "ts": 10000, "data": {"gs": [1, "two", null, true, {"k": "v"}]}}

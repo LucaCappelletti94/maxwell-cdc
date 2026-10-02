@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testb","table":"capture_events","def":{"database":"b8","table":"capevets","columns":[{"type":"bigint","name":"sttus","enuvalues":["oped"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"","typed":5}

@@ -1,3 +1,0 @@
-{"database":"testdb","table":"capture_events","query":"INSERT INTO `capture_events` (`id`, `nullable_text`, `happened_at`, `amount`, `status`) committed', '2026-08-28 1primary_key_columns4:03:02.123456', 4, 'open')","type":"insert","ts":1787934491,"xid":449,"xoffset":0,"position":"mysql-bin.00%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%0003:223699","d":24,"schema_id":5,"push_ts":1787934491.885788,"primary_key":[922210,11e10,10,11e10,11e0,0,11e0,1e20,1e0,11e0,1,11e0,1e20,1e0,22e0,1222,91e0,0,11e0,1e210,1e0,11,1e20,20,11e1,11e0,1e222,91e0,0,11e0,1e210,1e0,11e0,1e210,113372036854775810],"primary_key_columns":["id"],"data":{"id":9223372036854775814,"nulla[[[[[[[[ ble_text":"unco3:02.115045","amount":4,"status":"open"}}[[[[[[[[
-[
-[

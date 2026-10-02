@@ -1,1 +1,0 @@
-{"type":"table-create","database":"t","def":{"datset":"utf8mb4","ta+ble":"capture_events","columns":[{"type":"bigi","name":"amou~t","signed":true},{"type":"enum","name":"tatus","evnum-alues":["open","closjsoned"]}],"prigtid-key":["id"]},"ts":"CREAetraul*a   statussign\ntu","enum-values":["open","closed"]}],"priÿa0ÿmÿey"      i5}

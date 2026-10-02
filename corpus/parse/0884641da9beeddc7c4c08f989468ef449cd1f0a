@@ -1,1 +1,0 @@
-{"type":"table-create","d":"ents","def":{"database":"testdutf8ts","columns":[{"type":"bigint","name":"id","signed":false},{},{"type":"cvrahar","numn-length":6},{"tlues":["","closed"]}],"primary-key":["id"]},"ts":1,"schema_id":5}
