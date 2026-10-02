@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"tb_eves","old":{"dbase":"re_events","columns":[{"t":"stfloatatus","enum-values":6},{},{"type":"enucols","es":["one","two"]}]},"d":3}

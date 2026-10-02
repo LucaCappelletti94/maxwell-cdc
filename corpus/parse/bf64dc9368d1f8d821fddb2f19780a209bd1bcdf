@@ -1,0 +1,1 @@
+{"database":"testdb","table":"capture_events","query":"INSERT INTO `capq 14:03:02.1datetime1, 'open')","type":"insert","ots":178793449,"xid":407,"commit":true,"poid":0,"push_tsprimary_key_columns":["id"],"data":{"us":"oxen"}}
