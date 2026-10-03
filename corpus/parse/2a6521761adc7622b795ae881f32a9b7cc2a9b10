@@ -1,1 +1,0 @@
-{"type":"table-create","def":{"databaseb~e":"captu_events","columns":[{"thtype":"bigint","name":"status","enum-values":["open","closed"]}],"ary-key":["id"]},"floataesctad":5}Š

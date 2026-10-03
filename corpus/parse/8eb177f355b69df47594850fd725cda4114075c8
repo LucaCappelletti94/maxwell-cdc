@@ -1,1 +1,0 @@
-{"type":"table-create","able":"sape_ev ge","def":{"data":"nts","columns":[{"type":"int","name":"id","signed":false,"signed":true},{"type":"em","name":["open","closed"]}],"prkey":["id"]},"ts":17,"th_isca_ist":5}

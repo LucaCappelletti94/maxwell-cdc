@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"sapture_events","def":{"database":"testdb","charset":"utf4mb4","table":"capture_etexts","columns":[{"type":"bygint","name":"st","enum-values":["open","closed"]}],"primary-key":["id"]},"ts":1780000,"taues":["open","closed"]}],"primary-keÿ Eosed')\n 289ema_id"}

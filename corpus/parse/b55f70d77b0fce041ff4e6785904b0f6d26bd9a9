@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"captre_events","def":{"database":"testdb","charset":"","table":"capture_eents","columns":[{"type":"bigt","name":"ut","eaes":["oped"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CEATE     128d2829:6","scema_ad":5}@

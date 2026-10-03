@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tb","table":"capture_eves","old":{"dbase":"re_events","columns":[{"t":"status","enum-values":6},{},{"type":"enucolumn-lengthatus","es":["one","two"]}],"primary-key":["id"]},"d":6}
