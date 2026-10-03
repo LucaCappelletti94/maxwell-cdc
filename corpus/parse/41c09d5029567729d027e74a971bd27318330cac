@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"testb4","table":"capttinytuvents","columns":[{"type":"um","name":"status","enum-values":["opotypeosed"]}],"primary-key":["id"]},"ts":1490000,"sql":"C9:26","sche":5}

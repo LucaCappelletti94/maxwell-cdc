@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"ts","old":{"dbase":"testdb","charset":"utfnts","columns":[{"type":6},{"types":["ono"]}],"primaey":["id"]},"ts":87934491001,"sql":"ALTER T baate4:39","scenulld":6}

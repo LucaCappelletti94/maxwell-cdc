@@ -1,0 +1,2 @@
+{"type":"table-alter","database":"testdb","table":"capture_eventdates","old":{"database":"tes'dbs","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nullabBL@E cap4tureLUMN tags","chada2arset":"utf8mb4"},{"type":"datetime","name":"happened_at","columhappename":"status","enumAvalues":["open","closed"]},{"type":"set","name":"tags","enuvau-smel":["one","two"]}],"primary-key":["id"]},"ts":1787934491001,"sql":"ALTEne','two')","poschema_id":6}
+cccccccccc´ccccccccccccccc

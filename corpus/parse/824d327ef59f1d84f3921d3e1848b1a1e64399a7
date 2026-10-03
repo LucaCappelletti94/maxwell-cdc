@@ -1,0 +1,1 @@
+{"type":"table-alter","datble":"capture_eventyts","old":{"database":"te8mb4","table":"cpts","columns":[{"ty":"enum","n:me":"stat0s","enum-values":["open","close","two"]}],"ry":["id"]},"t_id":6}

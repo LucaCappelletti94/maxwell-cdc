@@ -1,0 +1,1 @@
+{"type":"table-alter","dabase":"t","old":{"datase":"tesentr","columns":[{"typgne":false},{"tyt":"utf8mb4"},{"column-ligned":true},{"type":"enum","nues":["open","closed"]},{"type":"set","name:":"tags","um-values":["on","two"]}],"primary-key":["id"]},"ts":1787934490999,"sql":"ALTER TABLE captu528d28'2a9:39","schem#a_id":6}

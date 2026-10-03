@@ -1,0 +1,1 @@
+{"type":"database-drop","database":"archive_tae","ts":100,"sql":"utf8m","tans":[{"type":"bi","name":"id","signxx":["one","two"]}],"primary-k":["id"]}),'}

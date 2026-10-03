@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"captu","def":{"database":"4","table":"capnts","columns":[{"type":"bnt","name":"id","Gl%ues":["open","lod"]}],"primary-key":["ik"]},"ts":170,"sql":"CREATEts (\nKEY,\n RCHAR(389),\n     E(3),\nV),\n \n mT(\n     at\n f6","schid":5}

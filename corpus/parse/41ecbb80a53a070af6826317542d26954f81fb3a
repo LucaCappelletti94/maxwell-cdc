@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"sapture_events","def":{"database":"tef8mb4","table":"capture_events","columns":[{"type":"int","name":"happenedus","enum[values":["openlosed"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CREA","server_id":1,"thread_id":24,"schema_ischeoa_id":5}
