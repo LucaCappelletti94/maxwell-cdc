@@ -1,5 +1,0 @@
-{"ty:1}
-
-{"type":"update","database":"db","table":"t","data":{"id":1},"oata":{"id":1}}
-
-{"type":"update","database":"db","table":"t","data":{"id":1},"old":{"id":0}}
