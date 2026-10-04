@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"db","charset":"utfs","columns":[{"type":"bigint","name":"id","sipe":"_at","column-length":6,"column-length":6},{"type":"s","enum-values":["one","two"]}],"primary-key":["id"]},"ts":134491000,"sql":"A0a9:39","schema_id":6}

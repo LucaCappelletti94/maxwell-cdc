@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testture_events","def":{"charset":"utf8mb4","columns":[{"type":"bihint","name":"id","signe":false},{"type":"vachar","name":"nullable_text","charset":"utf8mb4"},{"type":"datetime","name":"happened_at","column-length":6},{"type":"int","namd":"amo","sialues":["opesed"]}],"primaprimary-kery-key":["id"]},"ts":1787934490000,"":5}

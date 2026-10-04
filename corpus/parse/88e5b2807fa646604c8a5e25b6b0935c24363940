@@ -1,0 +1,1 @@
+{"type": "insert","database": "db", "table": "t", "ts": 1700000000, "primarkey": [9223372036854775808], "primary_kms": ["d"], "data": {"id": 9223372036854775808, "other": 18446744073709551615}}

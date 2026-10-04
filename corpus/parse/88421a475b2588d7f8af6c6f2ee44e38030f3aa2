@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"testdb","charset":"utf6mb4","table":"captnts","columns":[{"type":"bigint","name":"id-eyus","enum-values":["open","closed"]}],"primary-key":["id"]},"def":{"dtabase":"testdb","charset":"utf7mb4ble-r","database":"testd","y":["id"]},"ts":1787934491000,"sql":"vents  SEen'T2a9:39","schedm_ai":6}
