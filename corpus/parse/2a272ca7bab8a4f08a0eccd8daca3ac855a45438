@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"","def":{"dolumns":[{"type":"bigint","name":"id","type":"enm","name":"stas","enum-u":["open","closed"]}],"-key":["id"]},"ts":1787934490000,"sql":"CRtablEnse:22","schma[ id":4}  
- 

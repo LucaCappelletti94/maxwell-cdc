@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capture_vents","def":{"database":"","table":"caps","columns":[{"type":"bigint","name":"id","si":false},{"type":"varchar","name":"nullable_text","golu":true},{"type":"enum","name":"status","evalues":["open","closed"]}],"primary-key":["id"]},"ts":1787934489999,"sql":"CREATE T30:26","schnullema_ad":5}

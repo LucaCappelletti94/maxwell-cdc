@@ -1,1 +1,0 @@
-{"type":"table-alter","databasee":"captevents","old":{"st":"utre_evensqts","columns":[{"type":"biamount","signed":null},{"type":"enum","name":"stb","enalues":["one","two"]}],"commitprimary-key":["id"]},"xpxxxed":false},{"tvarc}

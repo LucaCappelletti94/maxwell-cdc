@@ -1,1 +1,0 @@
-{"type":"table-create","`ae":"cptunts","def":{"daabaseable":"capvents","columns":[{"thtype":"bigint","name":"status","enuues":["open","close"]}],"primary-key":["id"]},"ts":732148,"sqmflod":5}

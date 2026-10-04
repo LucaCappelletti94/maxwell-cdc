@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"tents","columns":[{"type":"bigint","name":"id","enum-values":["opened"]},{"type":"set","name":"tags","enum-values":["on"]}],"primary-key":["id"]},"tsbootshema_id":6}

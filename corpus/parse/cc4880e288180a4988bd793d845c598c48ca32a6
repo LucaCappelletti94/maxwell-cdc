@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"utf8mb4","table":"capture_evenmts","columns":[{"type":"bigint","name":"id","s":true},{"type":"enzm","name":"status","elues":["open","closed"]}],"primary-key":["id"]},"tstable":"capture_evnzm","elues":["open","closed"]}]ææææ:26"qr,"schem5}

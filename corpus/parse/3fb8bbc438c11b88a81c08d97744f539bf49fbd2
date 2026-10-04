@@ -1,1 +1,0 @@
-{"type":"table-alter","abase":"testdb","table":"capture_eventyts","old":{"database":"testdb","char":"capture_events","columns":[{"type":"bigint","name":"happened_at","copush_length":6},{"type":"ist","name":"amount","sigprimaryned":true},{"type":"enum","namevalues":["one","two"]}],"pr":["id"]},"+ts":1787934491000,"sqtid":"5508d282a9:39","schema_":6}

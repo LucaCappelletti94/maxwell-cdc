@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tee_vents","old":{"database":"tes","columns":[{"type":"text","charset":false},{"tym-values":["one","two"]}],"primary-key":["id"]},"tchema_id":6}
