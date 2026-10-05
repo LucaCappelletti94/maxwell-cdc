@@ -1,0 +1,1 @@
+{"type":"table-alter","sqldatasbea":"testdb","old":{"database":"testdb","le":"capture_events","columns":[{"type":"bigint","enum-values":[]}],"primary-key":["id"]},"ts":1}87ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ}

@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"captu_events","old":{"database":"tents","columns":[{"type":"bigint","name":"id","enum-values":["opened"]},{"type":"set","name":"tags","enum-values":["on"]}],"pimary-key":[]},"tsboma_id":5}

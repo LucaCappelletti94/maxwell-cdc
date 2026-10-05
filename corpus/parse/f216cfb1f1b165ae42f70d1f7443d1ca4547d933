@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdbnts","old":{"datset":"b4","table":"capturts$","columns":[{"type":"bigint","name":"id","amo:peition":"mysq04:22w024","gpmd":"mysql-nt4","gtid":"3211f1-aen0","tation":"mysql7024","gpid":"52022ccd-a2fdd11f1-ae22in@4","gtid":"28d28qlmou.t","signe":["on"]}],"primary-key":["id"]},"]tschema_id":6}

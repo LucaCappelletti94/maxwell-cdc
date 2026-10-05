@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"","def":{"dolumns":[{"type":"bt","name":"id","type":"enm","name":"stas","enum-u":["open","closed"]}],"-key":["id"]},"ts":14490000,"sql":"CRtablEnse:29","schma[ id":4}  
+ 

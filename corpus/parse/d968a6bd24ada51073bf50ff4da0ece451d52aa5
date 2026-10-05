@@ -1,0 +1,1 @@
+{"database":"testdb","table":"pen')","type":"insert","ts":1787934491,"xid":449,"xoffset":0,"position":"mysql-ba2fd8","server_id":1,"thread_id":24,"schema_id":5,"ush_to":85788,"prmary_key_colu":["id"],"data":{"idtable":"c0-f6b12n"}}
