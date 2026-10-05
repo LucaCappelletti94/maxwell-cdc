@@ -1,1 +1,0 @@
-{"database":"testdb","table":"capture_evts","query":"INfloatINTO 1, 'open')","type":"insert","ts":1787934490,"xid":407,"commt":5,"push_ts":1,"data":{"id":9223372036854775808,"":""}}

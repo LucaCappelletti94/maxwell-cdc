@@ -1,1 +1,0 @@
-{"type":"table-alter","dataBase":"st","old":{"dabase":"tesb","columns":[{"type":"biint","name":"id","signed":"int"}],"ey":["id"]},"t":6}

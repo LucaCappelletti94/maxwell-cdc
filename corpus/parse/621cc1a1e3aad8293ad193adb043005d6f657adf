@@ -1,1 +1,0 @@
-{"type":"table-alter","datasbea":"testdb","table":"capture_events","old":{"database":"testdb","charset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","column-length":6,"column-length":6},{"type":"s","enum-values":["one","two"]}],"primary-key":["id"]},"ts":1}87ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ","schema_id":6}

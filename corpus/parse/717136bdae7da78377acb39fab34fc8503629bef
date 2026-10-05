@@ -1,1 +1,0 @@
-{"type":"table-create","`ae":"cptunts","def":{"daabaseable":"capvents","columns":[{"thtype":"bigint","name":"statu","enuues":["open","close"]}],"primary-key":["id"]},"ts":732148,"s":5}

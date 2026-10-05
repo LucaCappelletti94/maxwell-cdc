@@ -1,1 +1,0 @@
-{"type": "bootstrap-insert", "database": "db", "table": "t", "comment": "my-taskabel", "primary_key": [84], "primary_key_columns": ["id"], "data": {"d": 42, "val": "hell"}}

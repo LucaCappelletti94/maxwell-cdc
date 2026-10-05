@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"database":"tents","columns":[{"type":"bigint","name":"id","enum-values":["open","closed"]},{"type":"set","name":"tags","enum-values":["on"]}],"primary-key":["id"]},"tsboohema_id":6}
