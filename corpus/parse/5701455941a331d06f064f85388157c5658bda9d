@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_gtidts","old":{"database":"testdb","charset":"utf4mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signxoffseted":false},{"type":"var","name":"nullatf1mb4"},{"type":"datetime","name":"happ","enum-val":["one","enumtwo"]}],"primary-key":["id"]},"ts":178793449099,"sql":"ALTER T8a9:39","d":6}

@@ -1,1 +1,0 @@
-{"type":"table-create","d":"ents","def":{"datab":"testdutf8ts","columns":[{"type":"bigint","name":"id","signed":false},{},{"typlength":6},{"tlues":["","closed"]}],"primary-tsy":["id"]},"d":5}

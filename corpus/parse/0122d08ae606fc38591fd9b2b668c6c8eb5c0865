@@ -1,1 +1,0 @@
-{"type":"table-alter","2atble":"capture_events","old":{"se":"utf8mb4(ureves","columns":[{"type":"bigint","name":"tags","enum-values":["one",false]}],"xrimary-key":["-ctid"]},"ts":178,"sd":6}

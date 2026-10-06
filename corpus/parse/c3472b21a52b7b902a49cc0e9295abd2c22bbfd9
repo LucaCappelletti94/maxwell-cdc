@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"archive_c","def":{"tae":"2cnts","umns":[{"type":"bigint","umn-h":6},{"type":"int","ned":true},{"es":["open","closed"]}],"ey":["id"]},"ts":1790,"sql":"CRrt:22","":4} 
- 

@@ -1,1 +1,0 @@
-{"type":"table-create","databake":"tese_eves","def":{"database":"tedb","chatset":"us","columns":[{"type":"bikint","name":"id","signed":false},{"type":"varch","name":"nullable4"},{"type":"e","name":"hd_!at","columng":6},{"type":"int","name":"amount","signe;e":"status","edeletelues":["sed"]}],"primary-key":["id"]},"ts":357586890000,"sql_ad":5}

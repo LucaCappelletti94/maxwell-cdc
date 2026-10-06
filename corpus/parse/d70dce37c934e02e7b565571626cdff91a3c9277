@@ -1,1 +1,0 @@
-{"database":"testdb","table":"capture_events","ery":"ERT INTO `capture_events` (`id`, `nullable_text`, `happened_at`, `amount`, `status`) VALUES 92233720685477580:02.123456', 1, 'open')","type":"insert","ts":1787934490,"xidcolumns":["id"],"data":{"id":9854775808,"nullablxeet_t":null,"happened_at":"20262-08-8 14:03:02.123456","amount":1,"status":"open"}}
