@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"tre_events","old":{"databasharset":"utfs","columns":[{"type":"que","name":"id","sipe":"_at","column-length":6,"column-length":6,"enum-values":["one","two"]}],"primary-key":["id"]},"ts":134491000,"sql":"A0a9:39","schema_id":6}

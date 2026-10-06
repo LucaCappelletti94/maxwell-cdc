@@ -1,0 +1,1 @@
+{"type":"table-create","d":"ejsonnts","def":{"datab":"ts8ts","columns":[{"type":"bigint","name":"id","signed":false},{},{"typles":["","closed"]}],"primartsy":["id"]},"d":5}

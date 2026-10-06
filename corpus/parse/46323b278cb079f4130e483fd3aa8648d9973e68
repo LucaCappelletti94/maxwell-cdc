@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"capture_vents","def":{"database":"","table":"capture_events","columns":[{"type":"bigint","name":"id","si":false},{"type":"har","name":"hat","golu":true},{"type":"enum","name":"s","enum-values":["open","cloed"]}],"primary-key":["id"]},"ts":1787934489999,"sql":"CREATE T29:26","schema_ad":5}

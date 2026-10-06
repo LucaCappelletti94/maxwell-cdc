@@ -1,0 +1,1 @@
+{"type":"table-alter","2atble":"captus","old":{"se":"uts","columns":[{"type":"bigint","name":"tags","enum-values":["one",false]}],"xrimary-key":["-ctid"]},"ts":178,"sd":6}

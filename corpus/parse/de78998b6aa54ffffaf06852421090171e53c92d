@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"dapture_events","def":{"database":"testmb4","table":"9capidtableture_events","columns":[{"type":"bigint","name":"id","snelues":["otypesed"]}],"primary-key":["id"]},"ts":178700,"sql":"","schema_ad":5}

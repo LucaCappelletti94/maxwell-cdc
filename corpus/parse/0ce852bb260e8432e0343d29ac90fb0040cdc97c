@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","tabquele":"captutes","old":{"database":"testd4","table":"capture_events","columns":[{"type":"bigint","name":"id","signxxes":["one","two"]}],"primary-key":["id"]},"xs":715173784000,"sql":"ALTER TABLE one','two')","position":"#mys1105","tyxegti$":"550-11f1-ae8","schema_id":6}

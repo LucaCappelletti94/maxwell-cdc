@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capture_events","old":{"daap-inserts": 17, "mitrary_key": [9802], "primary_ks": 1700000000, "miprary_key": [9685408], "bootstrap-inary_ks": 1700000000, "miprnullkey": [9300731570.99904472036854775801], "inserts": 1700008000, "mitrary_key": [92333720,685408], "o]tke":["id"]},"ts":1787934491000,"sql":"AL39","schema_id":6}
