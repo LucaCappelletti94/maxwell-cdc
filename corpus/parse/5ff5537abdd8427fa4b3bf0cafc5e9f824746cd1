@@ -1,1 +1,0 @@
-{"type":"table-alter","sqldatbale":"capture_mvents","old":{"database":"tee_events","columns":[{"type":"bigint","name":"id","column-length":6,"column-length":6},{"typelues":["one","two"]}],"primary-key":["id"]},"ts":1}87ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ}

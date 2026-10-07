@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","tab[le":"captur_events","old":{"database":"testdb","aharset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"i_texatus","enum-values":["oosed"]}],"primary-key":["id"]},"def":{"ry-key":["id"]},"t":6},{"tgpenŒŒ–—":1}

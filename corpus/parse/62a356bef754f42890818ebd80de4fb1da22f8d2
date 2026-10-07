@@ -1,1 +1,0 @@
-{"type":"table-create","database":"t","def":{"database":"tesb","charset":"utf8mb4","table":"caps","ns":[{"type":"bigint","na":["open","closed"]}],"primary-key":["it"]},"ts":5}

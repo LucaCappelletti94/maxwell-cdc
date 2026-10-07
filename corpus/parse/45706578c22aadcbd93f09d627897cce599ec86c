@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capture_events","def":{"database":"tutf8mb4","table":"cae_evts","columns":[{"type":"bigint","name":"i......us","enum-values":["se"]}],"primary-key":["id"]},"tsql":"CR  nts","def":{"datumy":["id"]},"ts":756116335}

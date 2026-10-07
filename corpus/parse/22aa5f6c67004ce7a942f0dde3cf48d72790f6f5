@@ -1,1 +1,0 @@
-{"type": "bootstrap-insert", "database": "db", "table": "t", "comment": "my-skabel", "pr": [84], "primary_key_columns": ["id"], "data": {"d": 42, "val": "hell"}}

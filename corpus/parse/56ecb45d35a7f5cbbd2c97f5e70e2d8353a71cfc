@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tb_eves","old":{"columns":[{"t":"stflotatus","enum-values":6},{},{"type":"enucols","es":["one","two"]}]},"d":3}

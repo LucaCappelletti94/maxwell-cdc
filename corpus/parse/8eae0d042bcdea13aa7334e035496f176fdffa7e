@@ -1,1 +1,0 @@
-{"type":"table-create","$atabase":"tepevents","def":{"database":"tescolapturets","columns":[{"type":"bihint","name":"id","signegth":4},{"~ype":"int","namd":"amoun","eum-values":["open","closed"]}],"primapry-key":["id"]},"ts":17871,"shema_id":5}
