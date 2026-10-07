@@ -1,0 +1,1 @@
+{"type":"table-alter","databese":"t_eves","old":{"columns":[{"t":"stfatus","enum-values":6},{},{"type":"enucols","es":["one","two"]}]},"d":3}

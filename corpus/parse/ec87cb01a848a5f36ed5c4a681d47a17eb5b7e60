@@ -1,0 +1,1 @@
+{"type":"table-alter","dse":"st","old":{"se":"tesb","columns":[{"type":"biint","name":"id","signed":"int"}],"ey":["id"]},"t":6}

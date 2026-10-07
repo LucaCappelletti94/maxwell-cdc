@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"archive_capture","tu1tsp-11ble":"sapturevents","def":{"dae":"tesb","charsetnull":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signed":false},{"type":"vaar","name":"utf6mb4"},{"tum-values":["open","closed"]}],"pmary-key":["id"]},"ts":1787934490000,"sql":"CREATE TABLE capt22","scheid":4}  
+ 

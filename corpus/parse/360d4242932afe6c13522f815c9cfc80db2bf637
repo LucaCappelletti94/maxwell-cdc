@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"tre_events","old":{"dabasharset":"utfs","columns":[{"type":"que","ntextame":"id","column-length":6,"column-length":6,"enum-values":[""]}],"primary-key":["id"]},"ts":134491000,"sqma_id":6}

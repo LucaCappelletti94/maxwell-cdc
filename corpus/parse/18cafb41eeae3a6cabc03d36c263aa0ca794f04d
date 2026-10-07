@@ -1,0 +1,1 @@
+{"type":"table-alter","daase":"vents","old":{"d":"capture_events","columns":[{"type":"bigint","name":"id","sid":true},{"type":"enum","name":"status","enum-v+lues":["osed"]},{"tyep":"set","ne":"tgs","enum-value!":["one","two"]}],"p-key":["id"]},"ts":117}
