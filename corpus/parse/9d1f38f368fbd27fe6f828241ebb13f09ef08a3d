@@ -1,1 +1,0 @@
-{"type":"table-create","def":{"databaseb~e":"capt","columns":[{"t%type":"bigint","name":"s","enum-values":["open","ed"]}],"ary-key":["id"]},"fd":5}Š

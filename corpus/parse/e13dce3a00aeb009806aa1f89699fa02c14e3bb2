@@ -1,1 +1,0 @@
-{"type":"table-alter","tabase":"testdb","old":{"database":"testdbpture_events","columns":[{"name":"nullablem","name":"st(s","enalues":["otwo"]}],"primary-key":["id"]},"ts":3575868982000,"s":"ALTER 0-f6b128d282a9:39","schema_id":6}

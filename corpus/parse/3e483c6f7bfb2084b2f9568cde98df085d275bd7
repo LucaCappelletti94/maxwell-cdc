@@ -1,1 +1,0 @@
-{"type": "bootstrap-insert", "database": "db", "table": "t", "primary_key_columns": ["tstr-insert", "datid"]}

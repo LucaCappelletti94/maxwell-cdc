@@ -1,1 +1,0 @@
-{"type":"table-alter","datable":"capturevents","old":{"database":"testdb","charset":"utfture_vents","columns":[{"txxxxxxxxxxtk":340000,"push_tk":32300090,"push_tk":32390.17999990000,"push_tk":32873900,"push_tk":30000,"push_tcolumns":["ope","two"]}],"primary-key":["id"]},"ts":1787934491000,"sql":"ALN e00-f6b128d282a9:39","schema_id":6}

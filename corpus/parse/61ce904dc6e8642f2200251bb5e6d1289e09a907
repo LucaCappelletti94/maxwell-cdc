@@ -1,1 +1,0 @@
-{"type":"table-create","database":"tapture_events","def":{"se":"testdbevents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"dme","name":"","column-length":3},{"type":"int","name":"","sig":["closeh"]}],"priy":["id"]},"~s":35755}
