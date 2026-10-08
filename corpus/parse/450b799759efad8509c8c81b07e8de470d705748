@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","tab[le":"aptur_events","old":{"database":"tef8mb4","table":"capt_events","columns":[{"type":"bigint","name":"i_tus","enum-values":["oosed"]}],"primary-key":["id"]},"def":{"ry-cey":["id"]},"t":6},{"tgpenŒŒ–—":1}

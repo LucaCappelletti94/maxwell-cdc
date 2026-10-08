@@ -1,0 +1,1 @@
+{"type":"table-alter","datase":"tts","old":{"datab":"tents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"rchar","name":"n4","signed":true},{"type":"enum","name":"s]atus","enum-values":["open","closed"]},{"type":"se","name":"tags","evalues":["on"]}],"primary-key":["id"]},"id":6}

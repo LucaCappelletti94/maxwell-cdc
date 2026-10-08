@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"captr2e^events","def":{"database":"testdb","ch":"","table":"captts","columns":[{"type":"","name":"ut","eaes":["oped"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CEATE     128d28","scema_ad":5}@

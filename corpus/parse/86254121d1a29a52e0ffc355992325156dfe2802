@@ -1,0 +1,1 @@
+{"type": "insert", "database": "db", "table": "t", "data": {"jsonl": {"a": {"b": {"c": {"d": {"e": 1}}}}}}}

@@ -1,0 +1,1 @@
+{"type":"table-create","d":"nts","def":{"datab":"ts8ts","columns":[{"type":"bigint","name":"id","signed":false},{},{"es":["","ced"]}],"primartsy":["id"]},"d":5}

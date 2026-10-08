@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"a4chive_c","def":{"datae":"capture_events","columns":[{"type":"bigint","umn-length":6},{"t":"enum","name":"status","enum-values":["open","clo[nsed"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CREATE TABLE captp-insert:22","schem[ id":4}  
+ 
