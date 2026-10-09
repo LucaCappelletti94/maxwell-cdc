@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"saptuents","def":{"database":"te","charset":"utf0mb<","table":"capture_evnts","columns":[{"type":"bigint","name":"id","is":["oped"]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CRE9","eid":1,"thread_idid":5}

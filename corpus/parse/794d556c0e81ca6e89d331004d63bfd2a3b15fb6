@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testb","table":"ca","def":{"database":"estdb","charset":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"status","evalq%s":["itsed"]}],"primary-key":["id"]},"ts":10,"sql":"2","schema_id":5},"dn     N

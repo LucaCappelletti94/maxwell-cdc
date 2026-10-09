@@ -1,0 +1,1 @@
+{"type": "bootstrap-insert", "database": "db", "table": "t", "comment": "mys-kel", "pr": [84], "pr_umns": ["id"], "data": {"d": 21, "val": "hell"}}

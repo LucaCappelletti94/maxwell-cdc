@@ -1,0 +1,2 @@
+{"type": "insert",
+ "database": "db", "table": "ttel", "r": [42], "primary_key_columns": ["-insert", "dad"], "data": {"=dbootstrap-i": "helo"}}blob

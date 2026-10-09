@@ -1,0 +1,1 @@
+{"type":"table-alter","databse":"tmst","old":{"columns":[{"type":"bigint","name":"id","signed":false},{"type":"ahar","name":"nullm","namt":["one","wo"]}],"prim:ary-key":["id"]},"t_ai":5}
