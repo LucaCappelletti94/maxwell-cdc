@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"evnnts","def":{"dolumns":[{"e":"bit","name":"id","type":"enum","name":"sta=nt","name":"id","type":"enum","name":"stats","enum-values":["n","closed"]}],"pr?imary-key":["id"]},"ts":868980002,"sql":"ABus","ea[ id":4}  
- 

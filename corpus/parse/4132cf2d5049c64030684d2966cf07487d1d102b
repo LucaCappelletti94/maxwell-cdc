@@ -1,1 +1,0 @@
-{"type":"table-alter","dabase":"t","old":{"datase":"tesentr","columns":[{"typgne":false},{"tyt":"utf8mb4"},{"column-ligned":true},{"type":"enum","nues":["open","closed"]},{"te":"set","name:":"tags","um-values":["on","two"]}],"primary-key":["id"]},"ts":1787934490999,"sql":"ALTER TABLE cap9:39","sch":6}

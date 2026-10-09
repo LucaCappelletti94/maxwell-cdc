@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"dapabase":"utf8mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signs":["open","closed"]},{"type":"set","name":"tags","enum-values":[]}],"primary-key":["id"]},"ts":1787934491000,"sql":"ALTER 39","schema_id":6}

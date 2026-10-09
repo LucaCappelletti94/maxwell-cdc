@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"ts","old":{"dbast":"utfnts","columns":[{"type":6},{"types":["ono"]}],"primaey":["id"]},"ts":879340}
