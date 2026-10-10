@@ -1,0 +1,2 @@
+{"type":"table-create","daabas":"-alter","database":"testdb","table":"captevents","old":{"dataimary-key":["id"]},"def":{"database":"testdb","charset":"utf6mb4","table":"capture_events","columns":[{"type":"bigint","name":"id","signxxxxxxxxxxxxxxxx":6},{"type":"intenum","name":"status","enum-":"tags","enualues":["one","two"]}],"primary-key":["id"]},"ts":1787934491000,"sql":"ALTER wo')","position":"mys239","schema_id":6}
+f":{"abase":"etdéb","charset":[]},"tsYyema_id":`}

@@ -1,0 +1,1 @@
+{"type":"table-create","def":{"le":"s","columns":[{"thtype":"biint","name":"tdatetimeu","enuues":["open","close"]}],"primary-key":["id"]},"ts":365}

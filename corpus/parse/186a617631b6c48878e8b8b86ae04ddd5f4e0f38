@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"evefalsents","def":{"dolumns":[{"type":"bigitn","name":"i","x":null},{"":"um","name":"stble_tuxt","name":"amount","signed":null},{"type":"eno'","posittype":"enum","name":"stas","\f\f-values":["open","cld"]}],"pe":"nert","\rimary-key":["id"]},"ts":170000,"sql":"CREinsert:4","sch[ id":4}  
+ '

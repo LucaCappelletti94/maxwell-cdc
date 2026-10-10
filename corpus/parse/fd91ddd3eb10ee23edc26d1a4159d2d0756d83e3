@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"tes","le":"aptuts","old":{"database":"tef6mb4","table":"capt_events","columns":[{"type":"bigint","name":"i_tus","enum-values":["oosed"]}],"primary-key":["id"]},"def":{"ry":["id"]},"t":6},{"tgpenŒŒ–—":1}

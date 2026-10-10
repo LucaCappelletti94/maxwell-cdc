@@ -1,0 +1,2 @@
+{"type":"table-alter","database":"testdb","table":"","old":{"database":"tes'dbs","columns":[{"type":"int","name":"id","signed":false},{"type":"varchar","name":"nullabBL@gs","chada2arset":"utf8mb4"},{"type":"datetitrueme","name":"happentatus","enumAvalues":["open","closed"]},{"type":"set","name":"tags","enuvau-smel":["ontwo"]}],"primary-keA":["id"]},"ts":1787934491001,"sql":"ALTEne','two')","poschema_id":6}
+c´ccccccccccccccc

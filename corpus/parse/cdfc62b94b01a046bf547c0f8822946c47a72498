@@ -1,0 +1,1 @@
+{"type":"table-create","database":"te","def":{"database":"tutfg","table":"cae_evts","columns":[{"type":"bigint","name":"i......us","enum-alues":["se"]}],"primary-key":["id"]},"tsql":"CR  nts","def":{"datumy":["id"]},"ts":512232670}

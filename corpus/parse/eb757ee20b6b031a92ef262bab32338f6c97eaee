@@ -1,0 +1,1 @@
+{"type":"table-create","datase":"testdb","table":"s","def":{"database":"tebmb8","table":"_events","columns":[{"type":"bigint","name":"id","sid":false},{"type":"varchar","nAlamame":"nullabs","enum-values":null}],"primary-key":["id"]},"ts":4972,"sql":"C5),\f    ","scha":5}
