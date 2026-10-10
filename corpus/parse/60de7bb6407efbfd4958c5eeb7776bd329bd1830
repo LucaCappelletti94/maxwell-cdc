@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capturets","old":{"database":"testdbqmb4","table":"capture_events","columns":[{"type":"varchar","name":"nullad","mcos":["open","closed"]},{"type":"set","name":"tags","enum-va*uvarchargs":["one","two"]}],"primary-key":["id"]},"positxxxdz":false},{"”type":"cÿclos","gticcd-a1}

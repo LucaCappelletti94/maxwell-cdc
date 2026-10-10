@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"sapture_e6dry serv3","\ntype":"teratedb","def":{"database":"","charset":"utf8mb4","table":"captures","columns":[{"type":"bigivarchar","name":"decimaletext","chalues":["o"]}],"primary-key":["id"]},"ts":178793490001,"sql":"C","_id":1,"te-crid":5}
