@@ -1,0 +1,1 @@
+{"type":"table-alter","e":"capture_evn","old":{"able":"cptnts","columns":[{"type":"biginar","name":"na","enum-values":["one","two"]}],"primary-key":["id"]},"tsma_id":3}
