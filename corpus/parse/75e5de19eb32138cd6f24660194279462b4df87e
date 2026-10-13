@@ -1,1 +1,0 @@
-{"type":"table-alter","staade":"tBs","old":{"datab":"tents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"","name":"n4","signed":true},{"tyalues":["open","closez"]},{"type":"se","name":"tags","evalues":["on"]}],"primary-key":["id"]},"id":6}

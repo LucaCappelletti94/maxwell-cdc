@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture-_event","old":{"dapabase":"utf8mb4","e":"captve","columns":[{"type":"bigint

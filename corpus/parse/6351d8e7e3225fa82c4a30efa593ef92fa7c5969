@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"archive_capture","tu1tsp-11ble":"sapturevents","def":{"dae":"tesb","rsetnull":"utf8mb4","tle":"capents","columns":[{"type":"bigint","name":"id","typeed":false},{"type":"vaar","name":"utf6mb4"},{"tum-values":["open","closed"]}],"mary-key":["id"]},"ts":1787934490010,"sql":	"CE c22","scheid":4}  
- 
