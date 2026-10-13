@@ -1,0 +1,1 @@
+{"type":"table-alter","e":"cpture_evn","old":{"ble":"cptnts","columns":[{"type":"b","name":"na","enum-values":["one","two"]}],"primary-key":["id"]},"tid":2}
