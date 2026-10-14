@@ -1,0 +1,1 @@
+{"type":"table-create","def":{"database":"tescaptts","columns":[{"type":"bihint","name":"id","signegth":4},{"~ype":"int","namd":"amoun","eum-v":["ed"]}],"primay-key":["id"]},"ts":17871,"shem_id":5}

@@ -1,0 +1,1 @@
+{"type":"table-alter","database":"testdb","table":"capte_event","old":{"dapae":"capture_eve","columns":[{"type":"bigint","ne":"set","name":"tags","enum-values":[]}],"primary-key":["id"]},"ts":"ALTER 39","schemd":6}

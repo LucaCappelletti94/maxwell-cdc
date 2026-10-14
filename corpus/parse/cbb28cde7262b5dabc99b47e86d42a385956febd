@@ -1,0 +1,1 @@
+{"type":"table-alter","mnsle":"cas","old":{"database":"te4","table":"pture_events","columns":[{"type":"bgint","natype":"enum","name":"status","enum-values":["open","closed"]}],"primary-key":["id"]},"def":{"dtabat":"uents","columns":[{"type":"bigint","name":"id","sie":"et","enum-values":["ontwo"]}],"primary-key":["id"]},"tsl":6}
