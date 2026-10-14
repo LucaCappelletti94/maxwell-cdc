@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_events","old":{"da[tabase":"tesvents","columns":[{"type":"bigum","name":"status","enum-values":["open","closed"]},{"type":"set","name":"llab","enum-values":["open","closed"],"column-lenign":"tags","enum-values":["one","two"]}],"prkey":["id"]},"ts":1787934491000,"sq-lenn-length":6},{"txxxxale":

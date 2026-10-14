@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testapture_events","def":{"dab":"utf7mbvents","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"nulb3"},{"type":"dme","name":"hapeepnd_at","column-length":6},{"type":"int","name":"amount","sd":true},{"type":"enum","name":"status","enum-values":["open","closed"]}],"maprimary-keyrey":["id"]},"ts":1449,"sqlositi":5}
