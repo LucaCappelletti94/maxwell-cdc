@@ -1,0 +1,5 @@
+{e":{"id$:/}}
+
+{"type":"table-alter","ddeltype":"db","tdata":{"id":1},"old":{"ta":{"id":1},"charset":0}}	
+{"type":"table-alter","ddele":"db","tdata":{"id":1},"old":{"ta":{"id":1},"charset":0}}
+e":"db
