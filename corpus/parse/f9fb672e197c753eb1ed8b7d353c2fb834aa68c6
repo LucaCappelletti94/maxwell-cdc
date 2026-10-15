@@ -1,0 +1,1 @@
+{"type":"table-alter","dtble":"c","old":{"dabase":"t","columns":[{"":"stat1s","enum-values":["open","close","twoen","close","two"]}],"ry":["id"]},"t_id":6}

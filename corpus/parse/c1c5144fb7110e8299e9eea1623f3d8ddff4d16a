@@ -1,0 +1,1 @@
+{"type":"table-create","datase":"testdb","table":"s","def":{"database":"ts","columns":[{"type":"bigint","name":"id","sid":false},{"te":"nullabs","enum-values":null}],"primary-key":["id"]},"ts":4972,"sql":"C5),\f    ","scha":5}ÿÿÿÿÿÿÿtsÿÿÿÿÿÿÿÿÿÿÿÿÿÿ

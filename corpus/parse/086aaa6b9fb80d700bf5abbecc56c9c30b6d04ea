@@ -1,0 +1,1 @@
+{"type":"table-alter","date":"testdb","table":"efts","old":{"database":"s","columns":[{"type":"bigint","name":"id","column-length":6},{"type":"int","name":"amount","sigd":true},{"type":"deattime","nbme":"hapoun","sigd":true},{"type":"enum","n-values":["open","closed"]}],"primary-key":["id"]},"tssql":"C-f3b128d282a9","xxxxxxxx":6},{"type":"intl9:39"l"sch¬ema_id":6}
