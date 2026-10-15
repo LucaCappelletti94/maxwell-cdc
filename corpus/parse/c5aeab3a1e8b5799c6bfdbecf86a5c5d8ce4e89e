@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"events","old":{"da[tabase":"tesvents","columns":[{"type":"bigum","name":"status","enum-values":["open","closed"]},{"type":"set","name":"llab","enum-values":["open","closed"],"column-lenign":"tags","enum-values":["otwo"]}],"prkey":["id"]},"ts":3575868982000,"sq-lenn":6},{"txxxxa²le":

@@ -1,1 +1,0 @@
-{"type":"table-alter","databble":"capvents","old":{"database":"testdf6mb4","table":"captnts","columns":[{"type":"bigint","name":"id","signed":false},{"type":"varchar","name":"ns","enum-values":["two"]}],"primary-key":["id"]},"tsma_id":6}
