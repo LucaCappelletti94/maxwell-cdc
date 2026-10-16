@@ -1,0 +1,2 @@
+{"type": "insert",
+ "database": "db", "table": "vte", "r": [42], "primary_lumns": ["-insert", "dad"], "data": {"=db-i": "helo"}}blob

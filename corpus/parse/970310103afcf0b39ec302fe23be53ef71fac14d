@@ -1,0 +1,1 @@
+{"type":"table-create","database":"tapture_nts","def":{"se":"vents","columns":[{"type":"biint","name":"id","signed":false},{"type":"dme","name":"","colum":1},{"type":"int","name":"","sig":["clo(seh"]}],"priy":["id"]}}

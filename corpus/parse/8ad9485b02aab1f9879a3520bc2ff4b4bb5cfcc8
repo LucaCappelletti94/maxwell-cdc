@@ -1,0 +1,1 @@
+{"type":"database-drop","database":"arcve_c","def":{"tae":"2cnts","umns":[{"type":"bigin","uh":6},{"p":"int","":true},{"es":["open","clo"]}],"ey":[""]},"ts":1790,"sql":"CRrt:22","":4}
