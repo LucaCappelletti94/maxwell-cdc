@@ -1,0 +1,2 @@
+{"type": "insert",
+ "database": "db", "table": "vte", "r": [42], "primary_luns": ["-insert", "dad"], "data": {"=db-i": "helo"}}blb

@@ -1,0 +1,2 @@
+{"type":"database-drop","database":"eents","def":{"dolumns":[{"type":"bigitn","name":"int","amed":true},{"type":"enucharsm","name":"status","en":"amount","signed":true},{"tpe":"enum","name":"s","entype":"dnype","e":"int","name":"amount","sign":true},{"ype":"enu2m","namexe":"um","name":"status","\f\f-vas":["open","closed"]}],"pe":"nert","itykey":["il"]},"ts":3580002,"sql":"CRE:2","s;hema[i d":4}  
+ 

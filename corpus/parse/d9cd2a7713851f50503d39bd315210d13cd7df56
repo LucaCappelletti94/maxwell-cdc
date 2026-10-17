@@ -1,0 +1,1 @@
+{"type":"table-alter","dabase":"","old":{"datase":"ter","columns":[{"typgne":false},{"tyt":"4"},{"coluligned":true},{"typa":"enum","nues":["opn","closed"]},{"e:ues":["on","two"]}],"primakey":["id"]},"tssch":6}

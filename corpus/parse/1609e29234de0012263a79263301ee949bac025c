@@ -1,0 +1,1 @@
+{"type":"table-alter","databasele":"cap","old":{"database":"testdb","charset":"utf4mb4","table":"captnts","columns":[{"type":"bigint","name":"id-e@yus","enum-vas":["opdecimalosed"]}],"primary-key":["id"]},"def":{"dtabase":"tb","charset":"utr","database":"testd","y":["id"]},"ts":718793,"sql":"ve9:39","schedm_ai":6}

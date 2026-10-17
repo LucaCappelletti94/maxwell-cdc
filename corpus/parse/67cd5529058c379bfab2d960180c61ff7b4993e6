@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testd","def":{"database":"utmb4","table":"capture_evenmts","columns":[{"type":"bigint","name":"id","s":true},{"type":"e","name":"]status","elues":["openlesed"]}],"primary-key":["id"]},"tstabs":["open","closed"]}]ææææ:52"

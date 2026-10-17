@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testtureents","def":{"columns":[{"type":"bihint","name":"id","signe":false},{"type":"var","name":"llablext","charset":"utf8mb4"},{"type":"datetime","name":"happet","column-length":6},{"type":["opesedgtrd"]}],"primaprimy-key":["id"]},"ts":79344900,"":5}+
