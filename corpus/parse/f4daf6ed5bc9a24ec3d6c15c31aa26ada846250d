@@ -1,0 +1,1 @@
+{"type":"table-create","database":"te","table":"cas","def":{"database":"tetb4","table":"e_even","columns":[{"type":"bigint","name":"ids","en-values":["open","closed"]}],"primary-key":["id"]},"ts":17899,"sql":"nt  )","position":"myin.000215295","gtid":"51026%","schema":5}P
