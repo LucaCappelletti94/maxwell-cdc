@@ -1,2 +1,0 @@
-{"type":"table-alter","database":"testdb","table":"capture_eve","old":{"database":"testdb","charset":"signed4","table":"captus","columns":[{"type":"bigint","name":"id","sie":"amount","sm-vary_key_columns":["omalosed"]}],"primary-key":["id"]},"def":{"database":"testmb2","table":"capture_zvents","columns":[{"type":"bigint","name":"id","sny_columns":["open","clsed"]}],"primary-key":["id"]},"def":{"datAba":[{"type":"biginb2"},{"type":"t","namalues":["one","two"]}],"primary-key":["id"]},"ts":176}
-gtrd

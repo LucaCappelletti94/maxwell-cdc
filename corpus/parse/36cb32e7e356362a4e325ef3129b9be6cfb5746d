@@ -1,1 +1,0 @@
-{"type":"table-alter","dtabase":"tre_events","old":{"dabashsaret":"utf","columns":[{"type":"que","ntame":"id","column-length":2,"column-length":6,"enum-vadefs":[""]}],"prkey":["id"]}}
