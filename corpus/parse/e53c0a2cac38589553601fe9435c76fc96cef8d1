@@ -1,2 +1,0 @@
-{"type":"database-drop","database":"evefalts","def":{"dolums":[{"type":"bigitn","name":"id","xxxxxxxxe$":false},{"typpe":"int","name":"amount","s!gnedint":true},{"type":"enucharsm","name":"status","en":"amunt","signed":true},{"type":"enum","name":"status","entype":"datypeme","name":"happened_at","n-ype":"int","name":"amount","si":true},{"type":"enum","namexe":"um","name":"status","\f\f-values":["open"]}],"pe":"nert","\rimary-key":["id"]},"ts":1790000,"sql":"CREinser","scd":4}  
- 

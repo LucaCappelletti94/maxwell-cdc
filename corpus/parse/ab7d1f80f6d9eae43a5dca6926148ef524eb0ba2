@@ -1,1 +1,0 @@
-{"type":"table-create","da":"s","def":{"database":"tebents","columns":[{"ty":"bigint","Alamame":"nullabs","enum-values":null}],"imary-key":["id"]},"tsl":"C8),\f    ","scha":5}
