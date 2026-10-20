@@ -1,0 +1,8 @@
+{ty
+
+{"type":"update","database":"","table":"t","data":{"if":4},"schema_id":6}
+		
+{"type":"update","database":"db","table":"t","data":{"if":2},"schema_id":1}
+"t
+
+90d
