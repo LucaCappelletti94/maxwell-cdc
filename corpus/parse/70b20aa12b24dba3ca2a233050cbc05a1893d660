@@ -1,0 +1,1 @@
+{"type":"table-create","database":"stdb","table":"","def":{"database":"te","charset":"tf0m<","table":"e_ts","columns":[{"type":"bint","name":"id","is":["ope["]}],"primary-key":["id"]},"ts":1787934490000,"sql":"CRE9","eid":1,"thread_idi":5}

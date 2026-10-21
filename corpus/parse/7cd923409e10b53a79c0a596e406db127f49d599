@@ -1,0 +1,1 @@
+{"type":"table-alter","old":{"database":"testd","table":"c","columns":[{"type":"bi*gint","name":"id","signed":false},{"type":"var","name":"ns","enumues":["two"]}],"primary-key":["id"]},"tsma_id":0}

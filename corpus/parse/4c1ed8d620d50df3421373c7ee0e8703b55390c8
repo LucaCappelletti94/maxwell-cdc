@@ -1,0 +1,1 @@
+{"type":"table-create","database":"testdb","table":"srv2","\ntype":"te","def":{"database":"","chet":"u8mb4","table":"ces","columns":[{"type":"bvarchar","name":"decimxt","chalues":["o"]}],"primary-key":["id"]},"ts":17879341,"sql":"C","_id":1,"tcrid":5}
