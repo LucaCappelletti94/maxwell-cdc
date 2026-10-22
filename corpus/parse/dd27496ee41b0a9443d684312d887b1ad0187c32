@@ -1,0 +1,1 @@
+{"type": "bootstrap-insert", "database": "db", "table": "t","primay": [45], "primary_key_columns": ["ostrbootrt", "dap-insrt", "datid"], "data": {"dval": "hello"}}

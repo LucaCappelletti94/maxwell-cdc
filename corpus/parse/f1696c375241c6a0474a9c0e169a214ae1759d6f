@@ -1,0 +1,1 @@
+{"type":"table-alter","e":"s","old":{"da[tabase":"tesvents","columns":[{"me":"llab","enum-values":["open","close"],"enum-values":["one","two"]}],"prkey":["id"]},"ts":1001,"sq-lenn-lth":6},position{"txle":

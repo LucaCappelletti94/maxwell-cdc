@@ -1,0 +1,1 @@
+{"type":"table-alter","data":"cap","old":{"database":"estdb","charset":"ub4","table":"captnts","columns":[{"type":"bigint","name":"id-e@yus","num-vas":["opdecised"]}],"primary-key":["id"]},"def":{"dtabase":"tb","charset":"utr","database":"testd","y":["id"]},"t_ai":6}

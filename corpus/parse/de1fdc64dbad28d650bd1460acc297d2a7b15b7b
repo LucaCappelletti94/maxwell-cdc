@@ -1,0 +1,1 @@
+{"type":"table-create","database":"te3tb","table":"captureWevints","def":{"database":"b4","table":"c00n","columns":[{"type":"bigint","name":"","enum-values":["oPen","closed"]}],"primary-key":["d"]},"ts":1787934490000,"sql":"","gtid":"3211f1-ae0bin.","en":["open","c"]}"p["7eãb
