@@ -1,1 +1,0 @@
-{"type":"table-alter","":"capte_event","old":{"dca":"captur@_eve","columns":[{"type":"","name":"tags","enum-values":[]}],"primary-key":["id"]},"ts":"AER 39","schemd":6}

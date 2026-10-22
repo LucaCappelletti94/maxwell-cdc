@@ -1,1 +1,0 @@
-{"type":"table-alter","database":"tedb","table":"ca","old":{"database":"testd8mbt","table":"cap8","columns":[{"type":"bi000nt","name":"lable_text","csalues":["pen","closed"]}],"primary-key":["id"]},"def":{"database":"tf4mb4","table":"caps","columns":[{"type":"bigi[nt","name":"id","s":["one","two"]}],"primary-key":["id"]},"ts":17870,"s":"utf8mb4"},{:":"ALTE

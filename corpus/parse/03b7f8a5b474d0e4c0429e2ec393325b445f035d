@@ -1,1 +1,0 @@
-{"type":"table-create","database":"td","table":"capt","def":{"database":"utf8mb4","table":"cpre_events","columns":[{"type":"bigi","name":"id","signed":false},{"type":"vrchar","name":"llext","m-v":["sed"]}],"primary-key":["id"]},"ts":190000,"sql":"","ma_ad":5}

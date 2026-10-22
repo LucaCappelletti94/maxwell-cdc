@@ -1,1 +1,0 @@
-{"type":"table-alter","databse":"testdb","table":"capture_events","old":{"da[tabase":"tesvents","columns":[{"me":"llab","enum-values":["open","close"],"column-lenign":"tags","enum-values":["one","two"]}],"prkey":["id"]},"ts":1000,"sq-lenn-lth":6},{"txle":

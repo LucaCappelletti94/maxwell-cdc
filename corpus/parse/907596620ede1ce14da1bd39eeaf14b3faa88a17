@@ -1,1 +1,0 @@
-{"type":"table-alter","databble":"capvents","old":{"database":"testd","table":"c","columns":[{"type":"bi*gint","name":"id","signed":false},{"type":"varcar","name":"ns","enumues":["two"]}],"primary-key":["id"]},"tsma_id":0}
