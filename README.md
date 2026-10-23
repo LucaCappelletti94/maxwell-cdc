@@ -2,9 +2,9 @@
 
 [![Crates.io](https://img.shields.io/crates/v/maxwell-cdc.svg)](https://crates.io/crates/maxwell-cdc)
 [![Documentation](https://docs.rs/maxwell-cdc/badge.svg)](https://docs.rs/maxwell-cdc)
-[![CI](https://github.com/LucaCappelletti94/maxwell-cdc/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaCappelletti94/maxwell-cdc/actions/workflows/ci.yml)
-[![Codecov](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc/branch/main/graph/badge.svg)](https://codecov.io/gh/LucaCappelletti94/maxwell-cdc)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/LucaCappelletti94/maxwell-cdc/blob/main/LICENSE)
+[![CI](https://github.com/connetto-rs/maxwell-cdc/actions/workflows/ci.yml/badge.svg)](https://github.com/connetto-rs/maxwell-cdc/actions/workflows/ci.yml)
+[![Codecov](https://codecov.io/gh/connetto-rs/maxwell-cdc/branch/main/graph/badge.svg)](https://codecov.io/gh/connetto-rs/maxwell-cdc)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/connetto-rs/maxwell-cdc/blob/main/LICENSE)
 
 `maxwell-cdc` turns the JSON that [Maxwell's Daemon](https://maxwells-daemon.io/) writes into typed
 Rust messages. It parses bytes you already have, so it never touches MySQL. `no_std`, needs an
