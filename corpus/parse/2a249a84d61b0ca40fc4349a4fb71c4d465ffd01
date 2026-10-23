@@ -1,1 +1,0 @@
-{"type":"table-create","database":"testdb","table":"capturevents","def":{"database":"testdb","charset":"utf4mb4","table":"cevents","columns":[{"type":"bint","name":",id","signed":true},{"type":"enum","name":"status","enum-values":["oen","closed"]}],"primary-key":["id"]},"ts":717000,"sql":"i6","schema_ad":5}
