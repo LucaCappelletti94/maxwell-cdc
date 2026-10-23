@@ -1,0 +1,1 @@
+{"type": "table-create", "database": "d", "ue": "t", "def": {"database": "d", "table":"t", "primary-key": [], "columns": []}, "ts": 1700000005, "sql": "d", "database": "db", "tle": "t", "def": {"atab": "db", "tae": "t", "pi": [], "cumns": []}, "ts":99, "sql": "CT)"}

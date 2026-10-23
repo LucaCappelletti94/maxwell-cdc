@@ -1,0 +1,1 @@
+{"type":"table-alter","mnsle":"cas","old":{"database":"te4","table":"pture_eve","columns":[{"type":"bgint","natype":"enum","name":"status","enum-values":["open"]}],"primary-key":["id"]},"def":{"dtabat":"uents","columns":[{"type":"bigint","name":"id","enum-values":["ontwo"]}],"primary-key":["id"]},"tsl":5}
